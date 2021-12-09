@@ -1,0 +1,175 @@
+---
+$id: "/gpif/track"
+type: object
+additionalProperties: false
+properties:
+
+  node:
+    constant: track
+
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      id:
+        type: string
+
+  name:
+    type: string
+
+  shortname:
+    type: string
+
+  color:
+    type: string
+    pattern: ^[0-9]{1,3} [0-9]{1,3} [0-9]{1,3}$
+
+  playbackstate:
+    type: string
+    enum:
+      - "default"
+      - "mute"
+      - "solo"
+
+  playingstyle:
+    type: string
+    enum:
+      - "default"
+      - "stringedfinger"
+      - "stringedpick"
+      - "stringedfingerpicking"
+      - "drumkitstick"
+      - "drumkitbrush"
+      - "drumkithotrod"
+      - "bassslap"
+
+  palmmute:
+    type: string
+    typecast:
+      type: float
+    
+  letringthroughout:
+    type: boolean
+
+  autoaccentuation:
+    type: string
+    typecast:
+      type: float
+
+  systemsdefautlayout:
+    type: string
+    typecast:
+      type: integer 
+
+  systemslayout:
+    type: string
+    numbersString: true
+
+  lyrics:
+    $ref: "/gpif/common#/definitions/Lyrics"
+    
+  rse:
+    $ref: "/gpif/rse"
+    
+  properties:
+    $ref: "#/definitions/List<TrackProperty>"
+  
+  generalmidi:
+    $ref: "#/definitions/GeneralMidi"
+
+  instrument:
+    $ref: "#/definitions/Instrument"
+
+  partsounding:
+    $ref: "#/definitions/Partsounding"
+
+definitions:
+
+  GeneralMidi:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          table:
+            type: string
+            enum:
+              - "Instrument"
+              - "Percussion"
+            
+      port:
+        type: string
+        typecast:
+          type: integer
+          minimum: 0
+          maximum: 3
+        
+      primarychannel:
+        type: string
+        typecast:
+          type: integer
+          minimum: 0
+          maximum: 16
+        
+      program:
+        type: string
+        typecast:
+          type: integer
+          minimum: 0
+          maximum: 127
+        
+      secondarychannel:
+        type: string
+        typecast:
+          type: integer
+          minimum: 0
+          maximum: 16
+        
+      foreonechannelperstring:
+        type: string
+        typecast:
+          type: boolean
+
+  Instrument:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          ref:
+            type: string
+
+  Partsounding:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      nominalkey:
+        type: string
+        pattern: ^neutral|([b]?[a-g](\s(bass|alto|soprano|sopranino|baritone|tenor))?)$
+        
+      transpositionpitch:
+        type: string
+        typecast:
+          type: integer
+          
+  # Lists
+
+  List<TrackProperty>:
+    type: object
+    additionalProperties: false
+    properties:
+  
+      items:
+        type: array
+        items:
+          $ref: "/gpif/track-property"

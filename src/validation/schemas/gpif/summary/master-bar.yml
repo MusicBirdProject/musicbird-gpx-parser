@@ -1,0 +1,221 @@
+---
+$id: "/gpif/master-bar"
+type: object
+additionalProperties: false
+required:
+- bars
+properties:
+
+  node:
+    constant: masterbar
+
+  alternateendings:
+    type: string
+    numbersString: true
+
+  bars:
+    type: string
+    numbersString: true
+
+  time:
+    type: string
+    pattern: ^[0-9]{1,2}\/[0-9]{1,3}$
+
+  freetime:
+    type: boolean
+    
+  doublebar:
+    type: boolean
+
+  tripletfeel:
+    type: string
+    enum:
+      - triplet8th
+      - triplet16th
+      - dotted16th
+      - dotted8th
+      - scottish8th
+      - scottish16th
+
+  key:
+    $ref: "#/definitions/Key"
+
+  repeat:
+    $ref: "#/definitions/Repeat"
+
+  section:
+    $ref: "#/definitions/Section"
+
+  fermatas:
+    $ref: "#/definitions/List<Fermata>"
+
+  xproperties:
+    $ref: "/gpif/props#/definitions/List<XProperty>"
+
+  directions:
+    $ref: "#/definitions/List<Direction>"
+
+definitions:
+
+  Key:
+    type: object
+    additionalProperties: false
+    required:
+      - accidentalcount
+      - mode
+    properties:
+
+      accidentalcount:
+        type: string
+        typecast:
+          type: integer
+          minimum: -7
+          maximum: 7
+
+      mode:
+        type: string
+        enum:
+          - "minor"
+          - "major"
+
+  Repeat:
+    type: object
+    additionalProperties: false
+    required:
+      - attrs
+    properties:
+
+      attrs:
+        type: object
+        additionalProperties: false
+        required:
+          - start
+          - end
+        properties:
+
+          count:
+            type: string
+            typecast:
+              type: integer
+
+          end:
+            type: string
+            typecast:
+              type: boolean
+
+          start:
+            type: string
+            typecast:
+              type: boolean
+
+  Section:
+    type: object
+    additionalProperties: false
+    properties:
+
+      letter:
+        type: string
+
+      text:
+        type: string
+
+  Fermata:
+    type: object
+    additionalProperties: false
+    required:
+      - node
+      - type
+      - offset
+      - length
+    properties:
+
+      node:
+        constant: fermata
+
+      type:
+        type: string
+        enum:
+          - "medium"
+          - "long"
+          - "short"
+
+      offset:
+        type: string
+        pattern: ^[0-9]{1,2}\/[0-9]{1,2}$
+
+      length:
+        type: string
+        typecast:
+          type: float
+          minimum: 0
+          maximum: 1
+
+  Direction:
+    type: object
+    additionalProperties: false
+    required:
+      - node
+      - value
+    properties:
+
+      node:
+        type: string
+        enum:
+          - target
+          - jump
+
+      value:
+        type: string
+        enum:
+
+          # Jump
+          - "dacapo"
+          - "dacoda"
+          - "dadoublecoda"
+          - "dacapoalfine"
+          - "dacapoalcoda"
+          - "dacapoaldoublecoda"
+          - "dasegno"
+          - "dasegnosegno"
+          - "dasegnoalfine"
+          - "dasegnoalcoda"
+          - "dasegnoaldoublecoda"
+          - "dasegnosegnoalfine"
+          - "dasegnosegnoalcoda"
+          - "dasegnosegnoaldoublecoda"
+
+          # Target
+          - "fine"
+          - "segno"
+          - "coda"
+          - "segnosegno"
+          - "doublecoda"
+
+  # Lists
+
+  List<Fermata>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/Fermata"
+
+  List<Direction>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/Direction"
+
+  List<MasterBarXProperty>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/MasterBarXProperty"

@@ -1,0 +1,49 @@
+{
+    "version": "0.1.0",
+    "name": "@musicbird/gpx-parser",
+    "author": "Fletcher Lind",
+    "email": "musicbird.project@gmail.com",
+    "license": "AGPL-3.0-or-later",
+    "keywords": [
+        "GPX",
+        "Guitar Pro"
+    ],
+    "main": "dist/main.js",
+    "module": "dist/main.js",
+    "typings": "index.d.ts",
+    "files": [
+        "./dist/main.js",
+        "./index.d.ts",
+        "./src"
+    ],
+    "scripts": {
+        "build": "rollup -c ./rollup.config.js",
+        "watch": "rollup -w -c ./rollup.config.js",
+        "build:cli": "rollup -c ./rollup-cli.config.js",
+        "watch:cli": "rollup -w -c ./rollup-cli.config.js",
+        "parse:test": "sh bin/cli.sh parse ./mocks/test.gpx -t ./parsed/test",
+        "bulkcheck": "sh bin/cli.sh bulk-check --errors-file=logs/bulk-check.errors.log --log-file=logs/bulk-check.log",
+        "prepublish": "npm run build"
+    },
+    "dependencies": {
+        "@musicbird/xml-parser": "^2.0.0",
+        "jdataview": "2.5.0"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^21.0.1",
+        "@rollup/plugin-json": "^4.1.0",
+        "@rollup/plugin-node-resolve": "^13.0.6",
+        "@rollup/plugin-yaml": "^3.1.0",
+        "@types/core-js": "^2.5.5",
+        "@types/jbinary": "^2.1.1",
+        "@types/jdataview": "0.0.31",
+        "@types/node": "^16.11.11",
+        "ajv": "^6.12.6",
+        "ajv-keywords": "^3.5.2",
+        "caporal": "^1.4.0",
+        "jbinary": "^2.1.5",
+        "rollup": "^2.60.2",
+        "rollup-plugin-typescript2": "^0.31.1",
+        "typescript": "4.5.2"
+    }
+}

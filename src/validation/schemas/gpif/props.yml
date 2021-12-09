@@ -1,0 +1,91 @@
+---
+$id: "/gpif/props"
+definitions:
+
+  # Property Types
+  
+  BooleanProperty:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      enable:
+        type: boolean
+        
+  FloatProperty:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      float:
+        type: string 
+        typecast:
+          type: float
+          
+  # Specific Properties
+        
+  FretProperty:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      fret:
+        type: string 
+        typecast:
+          type: integer
+        
+  StringProperty:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      string:
+        type: string 
+        typecast:
+          type: float
+        
+  # ---
+      
+  XProperty:
+    type: object
+    additionalProperties: false
+    properties:
+
+      node:
+        constant: xproperty
+
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+
+          id:
+            type: string
+            
+      int:
+        type: string
+
+      float:
+        type: string
+
+      double:
+        type: string
+        
+  # Lists
+
+  List<XProperty>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/props#/definitions/XProperty"

@@ -1,0 +1,9 @@
+---
+$id: "/gpx-root"
+type: object
+required:
+- gpif
+properties:
+
+  gpif:
+    $ref: "/gpif"

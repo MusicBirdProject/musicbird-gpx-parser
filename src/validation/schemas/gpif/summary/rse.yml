@@ -1,0 +1,327 @@
+---
+$id: "/gpif/rse"
+type: object
+additionalProperties: false
+properties:
+
+  bank:   
+    type: string
+    
+  channelstrip:
+    $ref: "#/definitions/Channelstrip"
+    
+  effectchains:
+    $ref: "#/definitions/List<EffectChain>"
+    
+  bankchanges:
+    $ref: "#/definitions/List<BankChange>"
+    
+  pickups:
+    $ref: "#/definitions/List<Pickup>"
+    
+definitions:    
+      
+  Channelstrip:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          version:
+            type: string
+            enum:
+              - "E56"
+            
+      automations:
+        $ref: "#/definitions/List<Automation>"
+        
+      parameters:
+        type: string
+        
+      bypassedautomations:
+        type: string
+        pattern: ^(dspparam_11|dspparam_12|[\s])+$
+
+  EffectChain:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      name:
+        type: string
+        
+      node:
+        constant: effectchain
+        
+      rail:
+        $ref: "#/definitions/Rail"
+        
+  Rail:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          name:
+            type: string
+            
+      items:
+        type: array
+        items: 
+          $ref: "#/definitions/RailEffect"
+          
+  RailEffect:
+    allOf:
+      - $ref: "#/definitions/Effect"
+      - type: object
+        properties:
+        
+          attrs:
+            type: object
+            additionalProperties: false
+            properties:
+            
+              id:
+                type: string
+                # enum:
+                #   - E30_EqGEq
+                #   - A10_StackClassic
+                #   - E31_EqBEq
+                #   - A01_ComboTop30
+                #   - M08_GraphicEQ10Band
+                #   - M09_GraphicEQ15Band
+                #   - E06_DistortionRat
+                #   - E25_ReverbSpring
+                #   - E27_CompressorSorr
+                #   - E02_OverdrivePreamp
+                #   - E10_DistortionMetal
+                #   - A07_StackRecti
+                #   - E13_FuzzPi
+                #   - A08_StackModern
+                #   - E17_ChorusBChorus
+                #   - E12_FuzzFast
+                #   - M11_DelayTapeDelay
+                #   - E26_CompressorOrange
+                #   - E15_ChorusEnsemble
+                #   - E01_OverdriveBlues
+                #   - E23_TremoloOpto
+                #   - A04_ComboEddie
+                #   - E20_Phaser90
+                #   - E18_FlangerMistress
+                #   - A09_StackOverloud
+                #   - E40_Volume
+                #   - E16_ChorusString
+                #   - E21_PhaserStone
+                #   - E33_WahAutoWah
+                #   - E32_EqAcoustic
+                #   - E28_PitchOctaver
+                #   - E07_DistortionGrunge
+                #   - E29_PitchWham
+                #   - E14_FuzzBender
+                #   - A12_SpeakerRotary
+                #   - E35_WahBWah
+                #   - E38_WahHorse
+                #   - E24_TremoloBias
+                #   - A11_StackAural
+                #   - E04_OverdriveJordan
+                #   - A15_LightBassLight
+                #   - E22_VibratoVibe
+                #   - M05_StudioReverbPlatePercussive
+                #   - M06_DynamicAnalogDynamic
+  
+  Effect:
+    type: object
+    additionalProperties: false
+    required:
+      - node
+    properties:
+    
+      node:
+        constant: effect
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          id:
+            type: string
+          
+      bypass:
+        type: boolean
+        
+      bypassedautomations:
+        type: string
+        pattern: ^(dspparam_00|dspparam_01|dspparam_11|dspparam_12)+$
+      
+      parameters:
+        type: string
+        numbersString: true
+        
+      automations:
+        $ref: "#/definitions/List<Automation>"
+    
+  Automation:
+    type: object
+    additionalProperties: false
+    required:
+      - node
+      - type
+      - bar
+      - position
+      - value
+    properties:
+
+      node:
+        const: automation
+
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+
+          id:
+            type: string
+
+      type:
+        type: string
+        enum:
+        - tempo # only for MasterAutomation
+        - dspparam_00
+        - dspparam_01
+        - dspparam_11
+        - dspparam_12
+
+      linear:
+        type: string
+        typecast:
+          type: boolean
+
+      visible:
+        type: string
+        typecast:
+          type: boolean
+
+      bar:
+        type: string
+        typecast:
+          type: integer
+
+      position:
+        type: string
+        typecast:
+          type: float
+          minimum: 0
+          maximum: 1
+
+      text:
+        type: string
+
+      value:
+        type: string # 0..1
+        numbersString: true
+        
+  Pickup:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: pickup
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          id:
+            type: string
+            
+          tone:
+            type: string
+            typecast:
+              type: float
+            
+          volume:
+            type: string
+            typecast:
+              type: float
+
+  BankChange:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: bankchange
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          barindex:
+            type: string
+            typecast:
+              type: integer
+            
+          tickoffset:
+            type: string
+            typecast:
+              type: integer
+            
+          bankid:
+            type: string
+            
+      pickups:
+        $ref: "#/definitions/List<Pickup>"
+
+  # Lists    
+  
+  List<Automation>:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/Automation"
+        
+  List<EffectChain>:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/EffectChain"
+
+  List<Pickup>:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/Pickup"
+
+  List<BankChange>:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/BankChange"

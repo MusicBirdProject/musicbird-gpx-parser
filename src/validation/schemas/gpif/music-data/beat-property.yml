@@ -1,0 +1,147 @@
+---
+$id: "/gpif/beat-property"
+type: object
+properties:
+
+  node:
+    constant: property
+    
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+
+      name:
+        type: string
+        enum:
+        - Brush
+        - Rasgueado
+        - Popped
+        - Slapped
+        - PickStroke
+        - BarreFret
+        - BarreString
+        - VibratoWTremBar
+        - WhammyBar
+        - WhammyBarOriginValue
+        - WhammyBarOriginOffset
+        - WhammyBarMiddleValue
+        - WhammyBarMiddleOffset1
+        - WhammyBarMiddleOffset2
+        - WhammyBarDestinationValue
+        - WhammyBarDestinationOffset
+        - WhammyBarExtend
+      
+select:
+  $data: "0/attrs/name"
+  
+selectCases:
+
+  # Whammy Bar
+      
+  WhammyBar: 
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+   
+  WhammyBarExtend: 
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+
+  WhammyBarOriginValue: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+
+  WhammyBarOriginOffset: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+
+  WhammyBarMiddleValue: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+
+  WhammyBarMiddleOffset1: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+     
+  WhammyBarMiddleOffset2: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+ 
+  WhammyBarDestinationValue: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+
+  WhammyBarDestinationOffset: 
+    $ref: "/gpif/props#/definitions/FloatProperty"  
+ 
+  Brush:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      direction:
+        type: string
+        enum:
+        - "up"
+        - "down"
+        
+  PickStroke:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}   
+      
+      direction:
+        type: string
+        enum:
+        - "up"
+        - "down"
+      
+  Rasgueado:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      rasgueado:
+        type: string
+        enum:
+        - "ii_1"
+        - "mi_1"
+        - "mii_1"
+        - "mii_2"
+        - "pmp_1"
+        - "pmp_2"
+        - "pei_1"
+        - "pei_2"
+        - "pai_1"
+        - "pai_2"
+        - "ami_1"
+        - "ami_2"
+        - "ppp_1"
+        - "amii_1"
+        - "amip_1"
+        - "eami_1"
+        - "eamii_1"
+        - "peami_1"
+      
+  Popped:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  Slapped:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+    
+  BarreFret:
+    $ref: "/gpif/props#/definitions/FretProperty"
+      
+  BarreString:
+    $ref: "/gpif/props#/definitions/StringProperty"
+      
+  VibratoWTremBar:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      strength:
+        type: string
+        enum:
+        - "slight"
+        - "wide"

@@ -1,0 +1,162 @@
+---
+$id: "/gpif/chord-collection"
+type: object
+properties:
+
+  items:
+    type: array
+    items:
+      $ref: "#/definitions/ChordCollectionItem"
+    
+definitions:
+
+  ChordCollectionItem:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: item
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          id:
+            type: string
+            
+          name:
+            type: string
+            
+      chord:
+        $ref: "#/definitions/Chord"
+
+  Chord:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/ChordPart"
+         
+  ChordPart:
+    type: object
+    properties:
+          
+      node:
+        type: string
+        enum: 
+        - keynote
+        - bassnote
+        - degree
+        
+    select:
+      $data: "0/node"
+      
+    selectCases:
+      keynote:
+        $ref: "/gpif/chord-collection#/definitions/KeyNote"
+      bassnote:
+        $ref: "/gpif/chord-collection#/definitions/BassNote"
+      degree:
+        $ref: "/gpif/chord-collection#/definitions/Degree"   
+
+  # Chord Parts
+
+  KeyNote:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: keynote
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          accidental:
+            $ref: "#/definitions/Accidental"
+            
+          step:
+            $ref: "#/definitions/Step"
+  
+  BassNote:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: bassnote
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          accidental:
+            $ref: "#/definitions/Accidental"
+            
+          step:
+            $ref: "#/definitions/Step"
+
+  Degree:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: degree
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          alteration:
+            type: string
+            enum:
+              - "Perfect"
+              - "Minor"
+              - "Major"
+              - "Diminished"
+              - "Augmented"
+  
+          interval:
+            type: string
+            enum:
+              - "Second"
+              - "Third"
+              - "Fourth"
+              - "Fifth"
+              - "Sixth"
+              - "Seventh"
+              - "Eighth"
+              - "Ninth"
+              - "Eleventh"
+              - "Thirteenth"
+            
+          omitted:
+            type: string
+            typecast:
+              type: boolean
+             
+  # Common
+  
+  Accidental:
+    type: string
+    enum:
+      - "natural"
+      - "flat"
+      - "sharp"
+      - "doublesharp"
+      - "doubleflat"
+      
+  Step:
+    type: string
+    pattern: ^[A-G]$
+    

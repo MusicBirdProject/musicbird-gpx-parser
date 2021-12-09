@@ -1,0 +1,52 @@
+---
+$id: "/gpif/score"
+type: object
+additionalProperties: false
+properties:
+
+  title:
+    type: string
+
+  subtitle:
+    type: string
+
+  artist:
+    type: string
+
+  album:
+    type: string
+
+  words:
+    type: string
+
+  music:
+    type: string
+
+  wordsandmusic:
+    type: string
+
+  copyright:
+    type: string
+
+  tabber:
+    type: string
+
+  instructions:
+    type: string
+
+  notices:
+    type: string
+
+  multivoice:
+    type: string
+    enum:
+    - "0>"
+    - "1>"
+
+  firstpagefooter: {}
+  firstpageheader: {}
+  pageheader: {}
+  pagefooter: {}
+  pagesetup: {}
+  scoresystemsdefaultlayout: {}
+  scoresystemslayout: {}

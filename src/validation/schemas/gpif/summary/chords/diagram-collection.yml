@@ -1,0 +1,190 @@
+---
+$id: "/gpif/diagram-collection"
+properties:
+
+  items:
+    type: array
+    items:
+      $ref: "#/definitions/DiagramCollectionItem"
+    
+definitions:
+
+  DiagramCollectionItem:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: item
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          id:
+            type: string
+            
+          name:
+            type: string
+            
+      diagram:
+        $ref: "#/definitions/Diagram"
+        
+      chord:
+        $ref: "/gpif/chord-collection#/definitions/Chord"
+   
+  Diagram:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          barsstates:
+            type: string
+            numbersString: true
+            
+          basefret:
+            type: string
+            typecast:
+              type: integer
+            
+          fretcount:
+            type: string
+            typecast:
+              type: integer
+            
+          stringcount:
+            type: string
+            typecast:
+              type: integer
+            
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/DiagramPart"
+    
+  DiagramPart:
+    type: object
+    properties:
+    
+      node:
+        type: string
+        enum: 
+        - property
+        - fingering
+        - fret
+        
+    select:
+      $data: "0/node"
+      
+    selectCases:
+      property:
+        $ref: "/gpif/diagram-collection#/definitions/DiagramProperty"
+      fingering:
+        $ref: "/gpif/diagram-collection#/definitions/Fingering"
+      fret:
+        $ref: "/gpif/diagram-collection#/definitions/Fret"  
+        
+  # Diagram Parts
+
+  DiagramProperty:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: property
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          name:
+            type: string
+            enum:
+              - "ShowFingering"
+            
+          type:
+            type: string
+            enum:
+              - "bool"
+            
+          value:
+            type: string
+            typecast:
+              type: boolean
+   
+  Fret:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: fret
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          fret:
+            type: string
+            typecast:
+              type: integer
+            
+          string:
+            type: string
+            typecast:
+              type: integer
+
+  Fingering:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: fingering
+        
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/Position"
+
+  Position:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      node:
+        constant: position
+        
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          finger:
+            type: string
+            enum:
+              - "Thumb"
+              - "Index"
+              - "Middle"
+              - "Ring"
+              - "Pinky"
+              - "None"
+              
+          fret:
+            type: string
+            typecast:
+              type: integer
+            
+          string:
+            type: string
+            typecast:
+              type: integer

@@ -1,0 +1,208 @@
+---
+$id: "/gpif/note-property"
+type: object
+properties:
+
+  node:
+    constant: property
+    
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+
+      name:
+        type: string
+        enum:
+        - String
+        - Fret
+        - HarmonicType
+        - HarmonicFret
+        - Muted
+        - PalmMuted
+        - Slide
+        - HopoOrigin
+        - HopoDestination
+        - Bended
+        - BendOriginValue
+        - BendOriginOffset
+        - BendDestinationValue
+        - BendMiddleOffset1
+        - BendMiddleOffset2
+        - BendDestinationOffset
+        - BendMiddleValue
+        - Element
+        - Variation
+        - Tone
+        - Octave
+        - Tapped
+        - LeftHandTapped
+        - ShowStringNumber
+        - Midi
+
+select:
+  $data: "0/attrs/name"
+  
+selectCases:
+
+  HopoOrigin:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+    
+  HopoDestination:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  Muted:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  PalmMuted:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  Bended: 
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  Tapped: 
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  LeftHandTapped: 
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  ShowStringNumber: 
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+     
+  BendOriginValue: 
+    $ref: "/gpif/props#/definitions/FloatProperty"
+     
+  BendOriginOffset:  
+    $ref: "/gpif/props#/definitions/FloatProperty"
+     
+  BendMiddleValue:  
+    $ref: "/gpif/props#/definitions/FloatProperty"
+        
+  BendMiddleOffset1:  
+    $ref: "/gpif/props#/definitions/FloatProperty"
+     
+  BendMiddleOffset2:  
+    $ref: "/gpif/props#/definitions/FloatProperty"
+     
+  BendDestinationValue:  
+    $ref: "/gpif/props#/definitions/FloatProperty"
+     
+  Fret:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      fret:
+        type: string  
+        typecast:
+          type: integer
+      
+  String:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      string:
+        type: string  
+        typecast:
+          type: integer
+
+  HarmonicType:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      htype:
+        type: string
+        enum:
+        - "natural"
+        - "pinch"
+        - "artificial"
+        - "tap"
+        - "semi"
+        - "feedback"
+        
+  HarmonicFret:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      hfret:
+        type: string  
+        typecast:
+          type: float
+  
+  Slide:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      flags:
+        type: string
+        typecast:
+          type: integer
+    
+  Element:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      element:
+        type: string
+        
+  Variation:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      variation:
+        type: string
+        
+  Tone:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      step:
+        type: string
+                
+  Octave:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      number:
+        type: string
+        typecast:
+          type: integer
+        
+  Midi:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      number:
+        type: string
+        typecast:
+          type: integer
+        

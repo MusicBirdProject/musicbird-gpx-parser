@@ -1,0 +1,113 @@
+---
+$id: "/gpif/track-property"
+type: object
+properties:
+
+  node:
+    constant: property
+    
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+
+      name:
+        type: string
+        enum:
+        - Tuning
+        - TuningFlat
+        - AutoBrush
+        - CapoFret
+        - PartialCapoFret
+        - PartialCapoStringFlags
+        - DiagramCollection
+        - DiagramWorkingSet
+        - ChordCollection
+        - ChordWorkingSet
+        
+select:
+  $data: "0/attrs/name"
+  
+selectCases:
+
+  AutoBrush:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+      
+  # Tuning
+  
+  Tuning:
+    additionalProperties: false
+    properties:
+
+      node: {}
+      attrs: {}
+        
+      pitches:
+        type: string
+        pattern: ^([0-9]+|\s)+$
+        
+  TuningFlat:
+    $ref: "/gpif/props#/definitions/BooleanProperty"
+ 
+  # Capo
+    
+  CapoFret:
+    $ref: "/gpif/props#/definitions/FretProperty"
+    
+  PartialCapoFret:
+    $ref: "/gpif/props#/definitions/FretProperty"
+      
+  PartialCapoStringFlags:
+    additionalProperties: false
+    properties:
+    
+      node: {}
+      attrs: {}
+      
+      flags:
+        type: string
+        typecast:
+          type: integer
+
+  # Chords and Diagrams
+
+  DiagramCollection:
+    additionalProperties: false
+    properties:
+
+      node: {}
+      attrs: {}
+      
+      items:
+        $ref: "/gpif/diagram-collection"
+
+  DiagramWorkingSet:
+    additionalProperties: false
+    properties:
+
+      node: {}
+      attrs: {}
+      
+      items:
+        $ref: "/gpif/diagram-collection"
+      
+  ChordCollection:
+    additionalProperties: false
+    properties:
+
+      node: {}
+      attrs: {}
+      
+      items:
+        $ref: "/gpif/chord-collection"
+    
+  ChordWorkingSet:
+    additionalProperties: false
+    properties:
+
+      node: {}
+      attrs: {}
+      
+      items:
+        $ref: "/gpif/chord-collection"
+      

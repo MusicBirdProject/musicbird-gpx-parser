@@ -1,0 +1,158 @@
+---
+$id: "/gpif/beat"
+type: object
+additionalProperties: false
+properties:
+
+  node:
+    constant: beat
+
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      id:
+        type: string
+
+  freetext:
+    type: string
+
+  dynamic:
+    type: string
+    enum:
+      - "ppp"
+      - "pp"
+      - "p"
+      - "mp"
+      - "mf"
+      - "f"
+      - "ff"
+      - "fff"
+
+  ottavia:
+    $ref: "/gpif/common#/definitions/Ottavia"
+
+  hairpin:
+    type: string
+    enum:
+      - "crescendo"
+      - "decrescendo"
+ 
+  arpeggio:
+    type: string
+    enum:
+      - "down"
+      - "up"
+
+  fadding:
+    type: string
+    enum:
+     - "fadein"
+     - "fadeout"
+     - "volumeswell"
+
+  slashed:
+    type: boolean
+
+  bank:
+    type: string
+
+  timer:
+    type: string
+    typecast:
+      type: integer
+
+  tremolo:
+    type: string
+    enum:
+      - "1/2"
+      - "1/4"
+      - "1/8"
+
+  variation:
+    type: string
+    typecast:
+      type: integer
+
+  wah:
+    type: string
+    enum:
+      - "open"
+      - "closed"
+
+  gracenotes:
+    type: string
+    enum:
+     - "beforebeat"
+     - "onbeat"
+
+  notes:
+    type: string
+    numbersString: true
+
+  chord:
+    type: string
+    numbersString: string
+
+  legato:
+    $ref: "#/definitions/Legato"
+
+  rhythm:
+    $ref: "#/definitions/RhythmLink"
+    
+  lyrics:
+    $ref: "/gpif/common#/definitions/Lyrics"
+
+  xproperties:
+    $ref: "/gpif/props#/definitions/List<XProperty>"
+
+  properties:
+    $ref: "#/definitions/List<BeatProperty>"
+
+definitions:
+
+  RhythmLink:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          ref:
+            type: string
+        
+  Legato:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          origin:
+            type: string
+            typecast:
+              type: boolean
+            
+          destination:
+            type: string
+            typecast:
+              type: boolean
+              
+  # Lists
+
+  List<BeatProperty>:
+    type: object
+    additionalProperties: false
+    properties:
+  
+      items:
+        type: array
+        items:
+          $ref: "/gpif/beat-property"

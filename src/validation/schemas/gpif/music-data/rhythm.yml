@@ -1,0 +1,70 @@
+---
+$id: "/gpif/rhythm"
+type: object
+additionalProperties: false
+properties:
+
+  node:
+    constant: rhythm
+    
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      id:
+        type: string
+        
+  notevalue:
+    type: string
+    enum:
+      - "whole"
+      - "half"
+      - "quarter"
+      - "eighth"
+      - "16th"
+      - "32nd"
+      - "64th"
+      - "128th"
+
+  primarytuplet:
+    $ref: "#/definitions/PrimaryTuplet"
+    
+  augmentationdot:
+    $ref: "#/definitions/AugmentationDot"
+    
+definitions:
+
+  AugmentationDot:
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          count:
+            type: string
+            typecast:
+              type: integer
+
+  PrimaryTuplet:
+    additionalProperties: false
+    properties:
+    
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+        
+          num:
+            type: string
+            typecast:
+              type: integer
+            
+          den:
+            type: string
+            typecast:
+              type: integer
+            

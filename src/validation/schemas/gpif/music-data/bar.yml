@@ -1,0 +1,43 @@
+---
+$id: "/gpif/bar"
+type: object
+additionalProperties: false
+properties:
+
+  node:
+    constant: bar
+
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      id:
+        type: string
+        
+  clef:
+    type: string
+    enum:
+      - "neutral"
+      - "g2"
+      - "c3"
+      - "c4"
+      - "f4"
+
+  ottavia:
+     $ref: "/gpif/common#/definitions/Ottavia"
+
+  similemark:
+    type: string
+    enum:
+      - "simple"
+      - "firstofdouble"
+      - "secondofdouble"
+    
+  voices:
+    type: string
+    numbersString: true
+    
+  xproperties:
+    $ref: "/gpif/props#/definitions/List<XProperty>"
+

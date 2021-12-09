@@ -1,0 +1,76 @@
+---
+$id: "/gpif/master-track"
+type: object
+additionalProperties: false
+required:
+- tracks
+properties:
+
+  anacrusis:
+    type: boolean
+
+  tracks:
+    type: string
+    numbersString: true
+
+  automations:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/MasterAutomation"
+
+  rse:
+    $ref: "#/definitions/MasterRse"
+
+definitions:
+
+  MasterRse:
+    type: object
+    additionalProperties: false
+    required:
+      - master
+    properties:
+
+      master:
+        type: object
+        properties:
+
+          items:
+            type: array
+            items:
+              $ref: "#/definitions/MasterEffect"
+
+  MasterAutomation:
+    allOf:
+      - $ref: "/gpif/rse#/definitions/Automation"
+      - type: object
+        properties:
+          type:
+            constant: tempo
+            
+  MasterEffect:
+    allOf:
+      - $ref: "/gpif/rse#/definitions/Effect"
+      - type: object
+        properties:
+        
+          attrs:
+            type: object
+            additionalProperties: false
+            properties:
+    
+              id:
+                type: string
+                enum:
+                  - "I01_VolumeAndPan"
+                  - "M01_StudioReverbHallConcertHall"
+                  - "M02_StudioReverbHallSmallTheater"
+                  - "M03_StudioReverbRoomStudioA"
+                  - "M04_StudioReverbRoomAmbience"
+                  - "M05_StudioReverbPlatePercussive"
+                  - "M06_DynamicAnalogDynamic"
+                  - "M08_GraphicEQ10Band"
+  

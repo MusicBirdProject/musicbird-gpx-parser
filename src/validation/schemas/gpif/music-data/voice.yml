@@ -1,0 +1,20 @@
+---
+$id: "/gpif/voice"
+type: object
+additionalProperties: false
+properties:
+
+  node:
+    constant: voice
+    
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      id:
+        type: string
+        
+  beats:
+    type: string
+    numbersString: true

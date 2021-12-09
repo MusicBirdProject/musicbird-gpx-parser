@@ -1,0 +1,115 @@
+---
+$id: "/gpif"
+type: object
+additionalProperties: false
+required:
+- gprevision
+- score
+- mastertrack
+- masterbars
+- tracks
+- bars
+- voices
+- beats
+- notes
+- rhythms
+properties:
+
+  gprevision:
+    type: string
+    typecast:
+      type: number
+
+  score:
+    $ref: "/gpif/score"
+
+  mastertrack:
+    $ref: "/gpif/master-track"
+
+  masterbars:
+    $ref: "#/definitions/List<MasterBar>"
+
+  tracks:
+    $ref: "#/definitions/List<Track>"
+
+  bars:
+    $ref: "#/definitions/List<Bar>"
+
+  voices:
+    $ref: "#/definitions/List<Voice>"
+
+  beats:
+    $ref: "#/definitions/List<Beat>"
+
+  notes:
+    $ref: "#/definitions/List<Note>"
+
+  rhythms:
+    $ref: "#/definitions/List<Rhythm>"
+
+definitions:
+
+  # Lists
+
+  List<MasterBar>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/master-bar"
+
+  List<Track>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/track"
+
+  List<Bar>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/bar"
+
+  List<Voice>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/voice"
+
+  List<Beat>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/beat"
+
+  List<Note>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/note"
+
+  List<Rhythm>:
+    type: object
+    properties:
+
+      items:
+        type: array
+        items:
+          $ref: "/gpif/rhythm"

@@ -1,0 +1,57 @@
+---
+$id: "/gpif/common"
+definitions:
+
+  Lyrics:
+    type: object
+    additionalProperties: false
+    required:
+      - items
+    properties:
+
+      attrs:
+        type: object
+        additionalProperties: false
+        properties:
+
+          dispatched:
+            type: string
+            typecast:
+              type: boolean
+
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/LyricsLine"
+
+  LyricsLine:
+    type: object
+    additionalProperties: false
+    required:
+      - node
+    properties:
+
+      node:
+        constant: line
+
+      offset:
+        type: string
+        typecast:
+          type: integer
+
+      text:
+        type:
+        - string
+        - boolean
+
+      value:
+        type: string
+  
+  Ottavia:
+    type: string
+    enum:
+      - "8va"
+      - "8vb"
+      - "15ma"
+      - "15mb"
+      

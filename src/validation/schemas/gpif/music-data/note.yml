@@ -1,0 +1,134 @@
+---
+$id: "/gpif/note"
+type: object
+additionalProperties: false
+properties:
+
+  node:
+    constant: note
+
+  attrs:
+    type: object
+    additionalProperties: false
+    properties:
+    
+      id:
+        type: string
+
+  letring:
+    type: boolean
+
+  vibrato:
+    type: string
+    enum:
+      - "slight"
+      - "wide"
+
+  trill:
+    type: string
+    typecast:
+      type: integer
+      minimum: 37
+      maximum: 100
+
+  accent:
+    type: string
+    typecast:
+      type: float
+
+  ornament:
+    type: string
+    enum:
+      - "uppermordent"
+      - "lowermordent"
+      - "turn"
+      - "invertedturn"
+
+  antiaccent:
+    type: string
+    enum:
+      - "normal"
+
+  leftfingering:
+    type: string
+    enum:
+      - "open"
+      - "p"
+      - "i"
+      - "m"
+      - "a"
+      - "c"
+
+  rightfingering:
+    type: string
+    enum:
+      - "open"
+      - "p"
+      - "i"
+      - "m"
+      - "a"
+      - "c"
+
+  accidental:
+    type: string
+    enum:
+      - "natural"
+      - "sharp"
+      - "flat"
+      - "doublesharp"
+      - "doubleflat"
+   
+  tie:
+    type: object
+    properties:
+    
+      attrs:
+        type: object
+        properties:
+        
+          origin:
+            type: string
+            typecast:
+              type: boolean
+              
+          destination:
+            type: string
+            typecast:
+              type: boolean
+
+  glide:
+    type: object
+    properties:
+    
+      type:
+        type: string
+        enum:
+          - "None"
+        
+      origin:
+        type: string
+        typecast:
+          type: integer
+        
+      destination:
+        type: string
+        typecast:
+          type: integer
+
+  xproperties:
+    $ref: "/gpif/props#/definitions/List<XProperty>"
+
+  properties:
+    $ref: "#/definitions/List<NoteProperty>"
+
+definitions:
+
+  List<NoteProperty>:
+    type: object
+    additionalProperties: false
+    properties:
+  
+      items:
+        type: array
+        items:
+          $ref: "/gpif/note-property"
