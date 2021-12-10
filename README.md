@@ -42,16 +42,16 @@ For using cli commands you need to:
 ```
     argument: <source-dir> // Source directory:
     option: -ff, --from-file <from-file> // Start from a file
-    option: -le, --errors-file <errors-file> // Errors Details
+    option: -ef, --errors-file <errors-file> // Errors Details
     option: -lf, --log-file <log-file> // Results file
 ```
 
 - **collect-enums** Walks through a collection of gpx files and collects possible fields and values
 ```
     argument: <source-dir> // 'Source directory
-    option: --log-file <log-file> // Result log file
-    option: --state-file <state-file> // State file (contains current state of a collection progress)
-    option: --from-file <from-file> // Start from an nth file
-    option: --max-items <max-items> // Max values to collect for an each field
-    option: --max-files <max-files> // Max source files count
+    option: -lf, --log-file <log-file> // Result log file
+    option: -sf, --state-file <state-file> // State file (contains current state of a collection progress)
+    option: -ff, --from-file <from-file> // Start from an nth file
+    option: -mi, --max-items <max-items> // Max values to collect for an each field
+    option: -mf, --max-files <max-files> // Max source files count
 ```
