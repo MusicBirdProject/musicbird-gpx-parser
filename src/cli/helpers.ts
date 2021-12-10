@@ -1,16 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
-const jBinary = require('jbinary');
-const commonTypes = {
-    'jBinary.littleEndian': true
-};
-
 ///
 
-export function loadBinary(file): Promise<any> {
-    return jBinary.load(file, commonTypes)
-        .then(binary => binary.read('blob'));
+export function loadBinary(filePath: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+        fs.readFile(filePath, (error, data) => {
+            if (error) return reject(error);
+            resolve(data);
+        });
+    });
 }
 
 export function saveToFile(fileName, rawData, isJson = false): void {

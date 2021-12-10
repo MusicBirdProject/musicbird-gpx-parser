@@ -15,7 +15,7 @@ export default cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
         return loadBinary(args.sourceFile)
             .then(blob => parseGpx(blob))
             .then(parsedData => {
-                logger.info(`${args.sourceFile} has been parsed`, options);
+                logger.info(`${args.sourceFile} has been parsed`);
 
                 if (options.validate) {
                     logger.info('Run validation');
@@ -30,7 +30,8 @@ export default cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
                 if (options.targetFile) {
                     saveToFile(`${options.targetFile}.json`, parsedData.gpif, true);
                     saveToFile(`${options.targetFile}.xml`, parsedData.xml.gpif);
-                    logger.info(`Saved into ${options.targetFile}`, options);
+                    logger.info(`Saved into ${options.targetFile}.json`);
+                    logger.info(`XML document saved into ${options.targetFile}.xml`);
                 } else {
                     logger.info(parsedData.gpif);
                 }

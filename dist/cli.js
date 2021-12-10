@@ -32,13 +32,14 @@ var process__namespace = /*#__PURE__*/_interopNamespace(process$1);
 
 var cli = require('caporal');
 
-const jBinary = require('jbinary');
-const commonTypes = {
-    'jBinary.littleEndian': true
-};
-function loadBinary(file) {
-    return jBinary.load(file, commonTypes)
-        .then(binary => binary.read('blob'));
+function loadBinary(filePath) {
+    return new Promise((resolve, reject) => {
+        fs__default["default"].readFile(filePath, (error, data) => {
+            if (error)
+                return reject(error);
+            resolve(data);
+        });
+    });
 }
 function saveToFile(fileName, rawData, isJson = false) {
     const data = !isJson
@@ -3035,7 +3036,7 @@ function decompressBlock(bin, isSkipHeader = false) {
         }
     }
     catch (e) {
-        if (typeof process__namespace !== 'undefined') {
+        if (typeof process__namespace !== 'undefined' && process__namespace.env.NODE_ENV === 'development') {
             console.error('End of Block Exception -', e);
         }
     }
@@ -3622,7 +3623,7 @@ cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
     return loadBinary(args.sourceFile)
         .then(blob => parseGpx(blob))
         .then(parsedData => {
-        logger.info(`${args.sourceFile} has been parsed`, options);
+        logger.info(`${args.sourceFile} has been parsed`);
         if (options.validate) {
             logger.info('Run validation');
             try {
@@ -3636,7 +3637,8 @@ cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
         if (options.targetFile) {
             saveToFile(`${options.targetFile}.json`, parsedData.gpif, true);
             saveToFile(`${options.targetFile}.xml`, parsedData.xml.gpif);
-            logger.info(`Saved into ${options.targetFile}`, options);
+            logger.info(`Saved into ${options.targetFile}.json`);
+            logger.info(`XML document saved into ${options.targetFile}.xml`);
         }
         else {
             logger.info(parsedData.gpif);

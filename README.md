@@ -13,16 +13,12 @@ npm install @musicbird/gpx-parser
 
 ## Usage
 ```ts
+import fs from 'fs';
 import { parseGpx, GPXRoot } from '@musicbird/gpx-parser';
 
-const jBinary = require('jbinary');
-const commonTypes = {
-    'jBinary.littleEndian': true
-};
+const gpxFile = fs.readFileSync(file);
+const parsedData: GPXRoot = parseGpx(gpxFile);
 
-const parsedData: GPXRoot = await jBinary.load(file, commonTypes)
-    .then(binary => binary.read('blob'))
-    .then(blob => parseGpx(blob));
 ```
 
 ## Contributing

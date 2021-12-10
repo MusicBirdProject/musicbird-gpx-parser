@@ -156,7 +156,7 @@ function decompressBlock(bin, isSkipHeader: boolean = false) {
         }
 
     } catch (e) {
-        if (typeof process !== 'undefined') {
+        if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development') {
             console.error('End of Block Exception -', e);
         }
     }
