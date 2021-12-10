@@ -3,12 +3,32 @@
 var fs = require('fs');
 var path = require('path');
 var require$$0 = require('string_decoder');
+var process$1 = require('process');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+        Object.keys(e).forEach(function (k) {
+            if (k !== 'default') {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function () { return e[k]; }
+                });
+            }
+        });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+}
 
 var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
 var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
 var require$$0__default = /*#__PURE__*/_interopDefaultLegacy(require$$0);
+var process__namespace = /*#__PURE__*/_interopNamespace(process$1);
 
 var cli = require('caporal');
 
@@ -53,6 +73,1272 @@ function walkSync(dir, filelist = []) {
             : filelist.concat(path__default["default"].join(dir, file));
     });
     return filelist;
+}
+
+var data$i = { $id:"/gpx-root",
+  type:"object",
+  required:[ "gpif" ],
+  properties:{ gpif:{ $ref:"/gpif" } } };
+data$i.$id;
+data$i.type;
+data$i.required;
+data$i.properties;
+
+var data$h = { $id:"/gpif",
+  type:"object",
+  additionalProperties:false,
+  required:[ "gprevision",
+    "score",
+    "mastertrack",
+    "masterbars",
+    "tracks",
+    "bars",
+    "voices",
+    "beats",
+    "notes",
+    "rhythms" ],
+  properties:{ gprevision:{ type:"string",
+      typecast:{ type:"number" } },
+    score:{ $ref:"/gpif/score" },
+    mastertrack:{ $ref:"/gpif/master-track" },
+    masterbars:{ $ref:"#/definitions/List<MasterBar>" },
+    tracks:{ $ref:"#/definitions/List<Track>" },
+    bars:{ $ref:"#/definitions/List<Bar>" },
+    voices:{ $ref:"#/definitions/List<Voice>" },
+    beats:{ $ref:"#/definitions/List<Beat>" },
+    notes:{ $ref:"#/definitions/List<Note>" },
+    rhythms:{ $ref:"#/definitions/List<Rhythm>" } },
+  definitions:{ "List<MasterBar>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/master-bar" } } } },
+    "List<Track>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/track" } } } },
+    "List<Bar>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/bar" } } } },
+    "List<Voice>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/voice" } } } },
+    "List<Beat>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/beat" } } } },
+    "List<Note>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/note" } } } },
+    "List<Rhythm>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/rhythm" } } } } } };
+data$h.$id;
+data$h.type;
+data$h.additionalProperties;
+data$h.required;
+data$h.properties;
+data$h.definitions;
+
+var data$g = { $id:"/gpif/common",
+  definitions:{ Lyrics:{ type:"object",
+      additionalProperties:false,
+      required:[ "items" ],
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ dispatched:{ type:"string",
+              typecast:{ type:"boolean" } } } },
+        items:{ type:"array",
+          items:{ $ref:"#/definitions/LyricsLine" } } } },
+    LyricsLine:{ type:"object",
+      additionalProperties:false,
+      required:[ "node" ],
+      properties:{ node:{ constant:"line" },
+        offset:{ type:"string",
+          typecast:{ type:"integer" } },
+        text:{ type:[ "string",
+            "boolean" ] },
+        value:{ type:"string" } } },
+    Ottavia:{ type:"string",
+      "enum":[ "8va",
+        "8vb",
+        "15ma",
+        "15mb" ] } } };
+data$g.$id;
+data$g.definitions;
+
+var data$f = { $id:"/gpif/props",
+  definitions:{ BooleanProperty:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        enable:{ type:"boolean" } } },
+    FloatProperty:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        "float":{ type:"string",
+          typecast:{ type:"float" } } } },
+    FretProperty:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        fret:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    StringProperty:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        string:{ type:"string",
+          typecast:{ type:"float" } } } },
+    XProperty:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"xproperty" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ id:{ type:"string" } } },
+        "int":{ type:"string" },
+        "float":{ type:"string" },
+        "double":{ type:"string" } } },
+    "List<XProperty>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/props#/definitions/XProperty" } } } } } };
+data$f.$id;
+data$f.definitions;
+
+var data$e = { $id:"/gpif/score",
+  type:"object",
+  additionalProperties:false,
+  properties:{ title:{ type:"string" },
+    subtitle:{ type:"string" },
+    artist:{ type:"string" },
+    album:{ type:"string" },
+    words:{ type:"string" },
+    music:{ type:"string" },
+    wordsandmusic:{ type:"string" },
+    copyright:{ type:"string" },
+    tabber:{ type:"string" },
+    instructions:{ type:"string" },
+    notices:{ type:"string" },
+    multivoice:{ type:"string",
+      "enum":[ "0>",
+        "1>" ] },
+    firstpagefooter:{},
+    firstpageheader:{},
+    pageheader:{},
+    pagefooter:{},
+    pagesetup:{},
+    scoresystemsdefaultlayout:{},
+    scoresystemslayout:{} } };
+data$e.$id;
+data$e.type;
+data$e.additionalProperties;
+data$e.properties;
+
+var data$d = { $id:"/gpif/rse",
+  type:"object",
+  additionalProperties:false,
+  properties:{ bank:{ type:"string" },
+    channelstrip:{ $ref:"#/definitions/Channelstrip" },
+    effectchains:{ $ref:"#/definitions/List<EffectChain>" },
+    bankchanges:{ $ref:"#/definitions/List<BankChange>" },
+    pickups:{ $ref:"#/definitions/List<Pickup>" } },
+  definitions:{ Channelstrip:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ version:{ type:"string",
+              "enum":[ "E56" ] } } },
+        automations:{ $ref:"#/definitions/List<Automation>" },
+        parameters:{ type:"string" },
+        bypassedautomations:{ type:"string",
+          pattern:"^(dspparam_11|dspparam_12|[\\s])+$" } } },
+    EffectChain:{ type:"object",
+      additionalProperties:false,
+      properties:{ name:{ type:"string" },
+        node:{ constant:"effectchain" },
+        rail:{ $ref:"#/definitions/Rail" } } },
+    Rail:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ name:{ type:"string" } } },
+        items:{ type:"array",
+          items:{ $ref:"#/definitions/RailEffect" } } } },
+    RailEffect:{ allOf:[ { $ref:"#/definitions/Effect" },
+        { type:"object",
+          properties:{ attrs:{ type:"object",
+              additionalProperties:false,
+              properties:{ id:{ type:"string" } } } } } ] },
+    Effect:{ type:"object",
+      additionalProperties:false,
+      required:[ "node" ],
+      properties:{ node:{ constant:"effect" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ id:{ type:"string" } } },
+        bypass:{ type:"boolean" },
+        bypassedautomations:{ type:"string",
+          pattern:"^(dspparam_00|dspparam_01|dspparam_11|dspparam_12)+$" },
+        parameters:{ type:"string",
+          numbersString:true },
+        automations:{ $ref:"#/definitions/List<Automation>" } } },
+    Automation:{ type:"object",
+      additionalProperties:false,
+      required:[ "node",
+        "type",
+        "bar",
+        "position",
+        "value" ],
+      properties:{ node:{ "const":"automation" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ id:{ type:"string" } } },
+        type:{ type:"string",
+          "enum":[ "tempo",
+            "dspparam_00",
+            "dspparam_01",
+            "dspparam_11",
+            "dspparam_12" ] },
+        linear:{ type:"string",
+          typecast:{ type:"boolean" } },
+        visible:{ type:"string",
+          typecast:{ type:"boolean" } },
+        bar:{ type:"string",
+          typecast:{ type:"integer" } },
+        position:{ type:"string",
+          typecast:{ type:"float",
+            minimum:0,
+            maximum:1 } },
+        text:{ type:"string" },
+        value:{ type:"string",
+          numbersString:true } } },
+    Pickup:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"pickup" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ id:{ type:"string" },
+            tone:{ type:"string",
+              typecast:{ type:"float" } },
+            volume:{ type:"string",
+              typecast:{ type:"float" } } } } } },
+    BankChange:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"bankchange" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ barindex:{ type:"string",
+              typecast:{ type:"integer" } },
+            tickoffset:{ type:"string",
+              typecast:{ type:"integer" } },
+            bankid:{ type:"string" } } },
+        pickups:{ $ref:"#/definitions/List<Pickup>" } } },
+    "List<Automation>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/Automation" } } } },
+    "List<EffectChain>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/EffectChain" } } } },
+    "List<Pickup>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/Pickup" } } } },
+    "List<BankChange>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/BankChange" } } } } } };
+data$d.$id;
+data$d.type;
+data$d.additionalProperties;
+data$d.properties;
+data$d.definitions;
+
+var data$c = { $id:"/gpif/chord-collection",
+  type:"object",
+  properties:{ items:{ type:"array",
+      items:{ $ref:"#/definitions/ChordCollectionItem" } } },
+  definitions:{ ChordCollectionItem:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"item" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ id:{ type:"string" },
+            name:{ type:"string" } } },
+        chord:{ $ref:"#/definitions/Chord" } } },
+    Chord:{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/ChordPart" } } } },
+    ChordPart:{ type:"object",
+      properties:{ node:{ type:"string",
+          "enum":[ "keynote",
+            "bassnote",
+            "degree" ] } },
+      select:{ $data:"0/node" },
+      selectCases:{ keynote:{ $ref:"/gpif/chord-collection#/definitions/KeyNote" },
+        bassnote:{ $ref:"/gpif/chord-collection#/definitions/BassNote" },
+        degree:{ $ref:"/gpif/chord-collection#/definitions/Degree" } } },
+    KeyNote:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"keynote" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ accidental:{ $ref:"#/definitions/Accidental" },
+            step:{ $ref:"#/definitions/Step" } } } } },
+    BassNote:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"bassnote" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ accidental:{ $ref:"#/definitions/Accidental" },
+            step:{ $ref:"#/definitions/Step" } } } } },
+    Degree:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"degree" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ alteration:{ type:"string",
+              "enum":[ "Perfect",
+                "Minor",
+                "Major",
+                "Diminished",
+                "Augmented" ] },
+            interval:{ type:"string",
+              "enum":[ "Second",
+                "Third",
+                "Fourth",
+                "Fifth",
+                "Sixth",
+                "Seventh",
+                "Eighth",
+                "Ninth",
+                "Eleventh",
+                "Thirteenth" ] },
+            omitted:{ type:"string",
+              typecast:{ type:"boolean" } } } } } },
+    Accidental:{ type:"string",
+      "enum":[ "natural",
+        "flat",
+        "sharp",
+        "doublesharp",
+        "doubleflat" ] },
+    Step:{ type:"string",
+      pattern:"^[A-G]$" } } };
+data$c.$id;
+data$c.type;
+data$c.properties;
+data$c.definitions;
+
+var data$b = { $id:"/gpif/diagram-collection",
+  properties:{ items:{ type:"array",
+      items:{ $ref:"#/definitions/DiagramCollectionItem" } } },
+  definitions:{ DiagramCollectionItem:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"item" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ id:{ type:"string" },
+            name:{ type:"string" } } },
+        diagram:{ $ref:"#/definitions/Diagram" },
+        chord:{ $ref:"/gpif/chord-collection#/definitions/Chord" } } },
+    Diagram:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ barsstates:{ type:"string",
+              numbersString:true },
+            basefret:{ type:"string",
+              typecast:{ type:"integer" } },
+            fretcount:{ type:"string",
+              typecast:{ type:"integer" } },
+            stringcount:{ type:"string",
+              typecast:{ type:"integer" } } } },
+        items:{ type:"array",
+          items:{ $ref:"#/definitions/DiagramPart" } } } },
+    DiagramPart:{ type:"object",
+      properties:{ node:{ type:"string",
+          "enum":[ "property",
+            "fingering",
+            "fret" ] } },
+      select:{ $data:"0/node" },
+      selectCases:{ property:{ $ref:"/gpif/diagram-collection#/definitions/DiagramProperty" },
+        fingering:{ $ref:"/gpif/diagram-collection#/definitions/Fingering" },
+        fret:{ $ref:"/gpif/diagram-collection#/definitions/Fret" } } },
+    DiagramProperty:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"property" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ name:{ type:"string",
+              "enum":[ "ShowFingering" ] },
+            type:{ type:"string",
+              "enum":[ "bool" ] },
+            value:{ type:"string",
+              typecast:{ type:"boolean" } } } } } },
+    Fret:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"fret" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ fret:{ type:"string",
+              typecast:{ type:"integer" } },
+            string:{ type:"string",
+              typecast:{ type:"integer" } } } } } },
+    Fingering:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"fingering" },
+        items:{ type:"array",
+          items:{ $ref:"#/definitions/Position" } } } },
+    Position:{ type:"object",
+      additionalProperties:false,
+      properties:{ node:{ constant:"position" },
+        attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ finger:{ type:"string",
+              "enum":[ "Thumb",
+                "Index",
+                "Middle",
+                "Ring",
+                "Pinky",
+                "None" ] },
+            fret:{ type:"string",
+              typecast:{ type:"integer" } },
+            string:{ type:"string",
+              typecast:{ type:"integer" } } } } } } } };
+data$b.$id;
+data$b.properties;
+data$b.definitions;
+
+var data$a = { $id:"/gpif/master-track",
+  type:"object",
+  additionalProperties:false,
+  required:[ "tracks" ],
+  properties:{ anacrusis:{ type:"boolean" },
+    tracks:{ type:"string",
+      numbersString:true },
+    automations:{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/MasterAutomation" } } } },
+    rse:{ $ref:"#/definitions/MasterRse" } },
+  definitions:{ MasterRse:{ type:"object",
+      additionalProperties:false,
+      required:[ "master" ],
+      properties:{ master:{ type:"object",
+          properties:{ items:{ type:"array",
+              items:{ $ref:"#/definitions/MasterEffect" } } } } } },
+    MasterAutomation:{ allOf:[ { $ref:"/gpif/rse#/definitions/Automation" },
+        { type:"object",
+          properties:{ type:{ constant:"tempo" } } } ] },
+    MasterEffect:{ allOf:[ { $ref:"/gpif/rse#/definitions/Effect" },
+        { type:"object",
+          properties:{ attrs:{ type:"object",
+              additionalProperties:false,
+              properties:{ id:{ type:"string",
+                  "enum":[ "I01_VolumeAndPan",
+                    "M01_StudioReverbHallConcertHall",
+                    "M02_StudioReverbHallSmallTheater",
+                    "M03_StudioReverbRoomStudioA",
+                    "M04_StudioReverbRoomAmbience",
+                    "M05_StudioReverbPlatePercussive",
+                    "M06_DynamicAnalogDynamic",
+                    "M08_GraphicEQ10Band" ] } } } } } ] } } };
+data$a.$id;
+data$a.type;
+data$a.additionalProperties;
+data$a.required;
+data$a.properties;
+data$a.definitions;
+
+var data$9 = { $id:"/gpif/master-bar",
+  type:"object",
+  additionalProperties:false,
+  required:[ "bars" ],
+  properties:{ node:{ constant:"masterbar" },
+    alternateendings:{ type:"string",
+      numbersString:true },
+    bars:{ type:"string",
+      numbersString:true },
+    time:{ type:"string",
+      pattern:"^[0-9]{1,2}\\/[0-9]{1,3}$" },
+    freetime:{ type:"boolean" },
+    doublebar:{ type:"boolean" },
+    tripletfeel:{ type:"string",
+      "enum":[ "triplet8th",
+        "triplet16th",
+        "dotted16th",
+        "dotted8th",
+        "scottish8th",
+        "scottish16th" ] },
+    key:{ $ref:"#/definitions/Key" },
+    repeat:{ $ref:"#/definitions/Repeat" },
+    section:{ $ref:"#/definitions/Section" },
+    fermatas:{ $ref:"#/definitions/List<Fermata>" },
+    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" },
+    directions:{ $ref:"#/definitions/List<Direction>" } },
+  definitions:{ Key:{ type:"object",
+      additionalProperties:false,
+      required:[ "accidentalcount",
+        "mode" ],
+      properties:{ accidentalcount:{ type:"string",
+          typecast:{ type:"integer",
+            minimum:-7,
+            maximum:7 } },
+        mode:{ type:"string",
+          "enum":[ "minor",
+            "major" ] } } },
+    Repeat:{ type:"object",
+      additionalProperties:false,
+      required:[ "attrs" ],
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          required:[ "start",
+            "end" ],
+          properties:{ count:{ type:"string",
+              typecast:{ type:"integer" } },
+            end:{ type:"string",
+              typecast:{ type:"boolean" } },
+            start:{ type:"string",
+              typecast:{ type:"boolean" } } } } } },
+    Section:{ type:"object",
+      additionalProperties:false,
+      properties:{ letter:{ type:"string" },
+        text:{ type:"string" } } },
+    Fermata:{ type:"object",
+      additionalProperties:false,
+      required:[ "node",
+        "type",
+        "offset",
+        "length" ],
+      properties:{ node:{ constant:"fermata" },
+        type:{ type:"string",
+          "enum":[ "medium",
+            "long",
+            "short" ] },
+        offset:{ type:"string",
+          pattern:"^[0-9]{1,2}\\/[0-9]{1,2}$" },
+        length:{ type:"string",
+          typecast:{ type:"float",
+            minimum:0,
+            maximum:1 } } } },
+    Direction:{ type:"object",
+      additionalProperties:false,
+      required:[ "node",
+        "value" ],
+      properties:{ node:{ type:"string",
+          "enum":[ "target",
+            "jump" ] },
+        value:{ type:"string",
+          "enum":[ "dacapo",
+            "dacoda",
+            "dadoublecoda",
+            "dacapoalfine",
+            "dacapoalcoda",
+            "dacapoaldoublecoda",
+            "dasegno",
+            "dasegnosegno",
+            "dasegnoalfine",
+            "dasegnoalcoda",
+            "dasegnoaldoublecoda",
+            "dasegnosegnoalfine",
+            "dasegnosegnoalcoda",
+            "dasegnosegnoaldoublecoda",
+            "fine",
+            "segno",
+            "coda",
+            "segnosegno",
+            "doublecoda" ] } } },
+    "List<Fermata>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/Fermata" } } } },
+    "List<Direction>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/Direction" } } } },
+    "List<MasterBarXProperty>":{ type:"object",
+      properties:{ items:{ type:"array",
+          items:{ $ref:"#/definitions/MasterBarXProperty" } } } } } };
+data$9.$id;
+data$9.type;
+data$9.additionalProperties;
+data$9.required;
+data$9.properties;
+data$9.definitions;
+
+var data$8 = { $id:"/gpif/track",
+  type:"object",
+  additionalProperties:false,
+  properties:{ node:{ constant:"track" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ id:{ type:"string" } } },
+    name:{ type:"string" },
+    shortname:{ type:"string" },
+    color:{ type:"string",
+      pattern:"^[0-9]{1,3} [0-9]{1,3} [0-9]{1,3}$" },
+    playbackstate:{ type:"string",
+      "enum":[ "default",
+        "mute",
+        "solo" ] },
+    playingstyle:{ type:"string",
+      "enum":[ "default",
+        "stringedfinger",
+        "stringedpick",
+        "stringedfingerpicking",
+        "drumkitstick",
+        "drumkitbrush",
+        "drumkithotrod",
+        "bassslap" ] },
+    palmmute:{ type:"string",
+      typecast:{ type:"float" } },
+    letringthroughout:{ type:"boolean" },
+    autoaccentuation:{ type:"string",
+      typecast:{ type:"float" } },
+    systemsdefautlayout:{ type:"string",
+      typecast:{ type:"integer" } },
+    systemslayout:{ type:"string",
+      numbersString:true },
+    lyrics:{ $ref:"/gpif/common#/definitions/Lyrics" },
+    rse:{ $ref:"/gpif/rse" },
+    properties:{ $ref:"#/definitions/List<TrackProperty>" },
+    generalmidi:{ $ref:"#/definitions/GeneralMidi" },
+    instrument:{ $ref:"#/definitions/Instrument" },
+    partsounding:{ $ref:"#/definitions/Partsounding" } },
+  definitions:{ GeneralMidi:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ table:{ type:"string",
+              "enum":[ "Instrument",
+                "Percussion" ] } } },
+        port:{ type:"string",
+          typecast:{ type:"integer",
+            minimum:0,
+            maximum:3 } },
+        primarychannel:{ type:"string",
+          typecast:{ type:"integer",
+            minimum:0,
+            maximum:16 } },
+        program:{ type:"string",
+          typecast:{ type:"integer",
+            minimum:0,
+            maximum:127 } },
+        secondarychannel:{ type:"string",
+          typecast:{ type:"integer",
+            minimum:0,
+            maximum:16 } },
+        foreonechannelperstring:{ type:"string",
+          typecast:{ type:"boolean" } } } },
+    Instrument:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ ref:{ type:"string" } } } } },
+    Partsounding:{ type:"object",
+      additionalProperties:false,
+      properties:{ nominalkey:{ type:"string",
+          pattern:"^neutral|([b]?[a-g](\\s(bass|alto|soprano|sopranino|baritone|tenor))?)$" },
+        transpositionpitch:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    "List<TrackProperty>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/track-property" } } } } } };
+data$8.$id;
+data$8.type;
+data$8.additionalProperties;
+data$8.properties;
+data$8.definitions;
+
+var data$7 = { $id:"/gpif/track-property",
+  type:"object",
+  properties:{ node:{ constant:"property" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ name:{ type:"string",
+          "enum":[ "Tuning",
+            "TuningFlat",
+            "AutoBrush",
+            "CapoFret",
+            "PartialCapoFret",
+            "PartialCapoStringFlags",
+            "DiagramCollection",
+            "DiagramWorkingSet",
+            "ChordCollection",
+            "ChordWorkingSet" ] } } } },
+  select:{ $data:"0/attrs/name" },
+  selectCases:{ AutoBrush:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    Tuning:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        pitches:{ type:"string",
+          pattern:"^([0-9]+|\\s)+$" } } },
+    TuningFlat:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    CapoFret:{ $ref:"/gpif/props#/definitions/FretProperty" },
+    PartialCapoFret:{ $ref:"/gpif/props#/definitions/FretProperty" },
+    PartialCapoStringFlags:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        flags:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    DiagramCollection:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        items:{ $ref:"/gpif/diagram-collection" } } },
+    DiagramWorkingSet:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        items:{ $ref:"/gpif/diagram-collection" } } },
+    ChordCollection:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        items:{ $ref:"/gpif/chord-collection" } } },
+    ChordWorkingSet:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        items:{ $ref:"/gpif/chord-collection" } } } } };
+data$7.$id;
+data$7.type;
+data$7.properties;
+data$7.select;
+data$7.selectCases;
+
+var data$6 = { $id:"/gpif/bar",
+  type:"object",
+  additionalProperties:false,
+  properties:{ node:{ constant:"bar" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ id:{ type:"string" } } },
+    clef:{ type:"string",
+      "enum":[ "neutral",
+        "g2",
+        "c3",
+        "c4",
+        "f4" ] },
+    ottavia:{ $ref:"/gpif/common#/definitions/Ottavia" },
+    similemark:{ type:"string",
+      "enum":[ "simple",
+        "firstofdouble",
+        "secondofdouble" ] },
+    voices:{ type:"string",
+      numbersString:true },
+    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" } } };
+data$6.$id;
+data$6.type;
+data$6.additionalProperties;
+data$6.properties;
+
+var data$5 = { $id:"/gpif/beat",
+  type:"object",
+  additionalProperties:false,
+  properties:{ node:{ constant:"beat" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ id:{ type:"string" } } },
+    freetext:{ type:"string" },
+    dynamic:{ type:"string",
+      "enum":[ "ppp",
+        "pp",
+        "p",
+        "mp",
+        "mf",
+        "f",
+        "ff",
+        "fff" ] },
+    ottavia:{ $ref:"/gpif/common#/definitions/Ottavia" },
+    hairpin:{ type:"string",
+      "enum":[ "crescendo",
+        "decrescendo" ] },
+    arpeggio:{ type:"string",
+      "enum":[ "down",
+        "up" ] },
+    fadding:{ type:"string",
+      "enum":[ "fadein",
+        "fadeout",
+        "volumeswell" ] },
+    slashed:{ type:"boolean" },
+    bank:{ type:"string" },
+    timer:{ type:"string",
+      typecast:{ type:"integer" } },
+    tremolo:{ type:"string",
+      "enum":[ "1/2",
+        "1/4",
+        "1/8" ] },
+    variation:{ type:"string",
+      typecast:{ type:"integer" } },
+    wah:{ type:"string",
+      "enum":[ "open",
+        "closed" ] },
+    gracenotes:{ type:"string",
+      "enum":[ "beforebeat",
+        "onbeat" ] },
+    notes:{ type:"string",
+      numbersString:true },
+    chord:{ type:"string",
+      numbersString:"string" },
+    legato:{ $ref:"#/definitions/Legato" },
+    rhythm:{ $ref:"#/definitions/RhythmLink" },
+    lyrics:{ $ref:"/gpif/common#/definitions/Lyrics" },
+    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" },
+    properties:{ $ref:"#/definitions/List<BeatProperty>" } },
+  definitions:{ RhythmLink:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ ref:{ type:"string" } } } } },
+    Legato:{ type:"object",
+      additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ origin:{ type:"string",
+              typecast:{ type:"boolean" } },
+            destination:{ type:"string",
+              typecast:{ type:"boolean" } } } } } },
+    "List<BeatProperty>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/beat-property" } } } } } };
+data$5.$id;
+data$5.type;
+data$5.additionalProperties;
+data$5.properties;
+data$5.definitions;
+
+var data$4 = { $id:"/gpif/beat-property",
+  type:"object",
+  properties:{ node:{ constant:"property" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ name:{ type:"string",
+          "enum":[ "Brush",
+            "Rasgueado",
+            "Popped",
+            "Slapped",
+            "PickStroke",
+            "BarreFret",
+            "BarreString",
+            "VibratoWTremBar",
+            "WhammyBar",
+            "WhammyBarOriginValue",
+            "WhammyBarOriginOffset",
+            "WhammyBarMiddleValue",
+            "WhammyBarMiddleOffset1",
+            "WhammyBarMiddleOffset2",
+            "WhammyBarDestinationValue",
+            "WhammyBarDestinationOffset",
+            "WhammyBarExtend" ] } } } },
+  select:{ $data:"0/attrs/name" },
+  selectCases:{ WhammyBar:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    WhammyBarExtend:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    WhammyBarOriginValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    WhammyBarOriginOffset:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    WhammyBarMiddleValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    WhammyBarMiddleOffset1:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    WhammyBarMiddleOffset2:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    WhammyBarDestinationValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    WhammyBarDestinationOffset:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    Brush:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        direction:{ type:"string",
+          "enum":[ "up",
+            "down" ] } } },
+    PickStroke:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        direction:{ type:"string",
+          "enum":[ "up",
+            "down" ] } } },
+    Rasgueado:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        rasgueado:{ type:"string",
+          "enum":[ "ii_1",
+            "mi_1",
+            "mii_1",
+            "mii_2",
+            "pmp_1",
+            "pmp_2",
+            "pei_1",
+            "pei_2",
+            "pai_1",
+            "pai_2",
+            "ami_1",
+            "ami_2",
+            "ppp_1",
+            "amii_1",
+            "amip_1",
+            "eami_1",
+            "eamii_1",
+            "peami_1" ] } } },
+    Popped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    Slapped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    BarreFret:{ $ref:"/gpif/props#/definitions/FretProperty" },
+    BarreString:{ $ref:"/gpif/props#/definitions/StringProperty" },
+    VibratoWTremBar:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        strength:{ type:"string",
+          "enum":[ "slight",
+            "wide" ] } } } } };
+data$4.$id;
+data$4.type;
+data$4.properties;
+data$4.select;
+data$4.selectCases;
+
+var data$3 = { $id:"/gpif/voice",
+  type:"object",
+  additionalProperties:false,
+  properties:{ node:{ constant:"voice" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ id:{ type:"string" } } },
+    beats:{ type:"string",
+      numbersString:true } } };
+data$3.$id;
+data$3.type;
+data$3.additionalProperties;
+data$3.properties;
+
+var data$2 = { $id:"/gpif/note",
+  type:"object",
+  additionalProperties:false,
+  properties:{ node:{ constant:"note" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ id:{ type:"string" } } },
+    letring:{ type:"boolean" },
+    vibrato:{ type:"string",
+      "enum":[ "slight",
+        "wide" ] },
+    trill:{ type:"string",
+      typecast:{ type:"integer",
+        minimum:37,
+        maximum:100 } },
+    accent:{ type:"string",
+      typecast:{ type:"float" } },
+    ornament:{ type:"string",
+      "enum":[ "uppermordent",
+        "lowermordent",
+        "turn",
+        "invertedturn" ] },
+    antiaccent:{ type:"string",
+      "enum":[ "normal" ] },
+    leftfingering:{ type:"string",
+      "enum":[ "open",
+        "p",
+        "i",
+        "m",
+        "a",
+        "c" ] },
+    rightfingering:{ type:"string",
+      "enum":[ "open",
+        "p",
+        "i",
+        "m",
+        "a",
+        "c" ] },
+    accidental:{ type:"string",
+      "enum":[ "natural",
+        "sharp",
+        "flat",
+        "doublesharp",
+        "doubleflat" ] },
+    tie:{ type:"object",
+      properties:{ attrs:{ type:"object",
+          properties:{ origin:{ type:"string",
+              typecast:{ type:"boolean" } },
+            destination:{ type:"string",
+              typecast:{ type:"boolean" } } } } } },
+    glide:{ type:"object",
+      properties:{ type:{ type:"string",
+          "enum":[ "None" ] },
+        origin:{ type:"string",
+          typecast:{ type:"integer" } },
+        destination:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" },
+    properties:{ $ref:"#/definitions/List<NoteProperty>" } },
+  definitions:{ "List<NoteProperty>":{ type:"object",
+      additionalProperties:false,
+      properties:{ items:{ type:"array",
+          items:{ $ref:"/gpif/note-property" } } } } } };
+data$2.$id;
+data$2.type;
+data$2.additionalProperties;
+data$2.properties;
+data$2.definitions;
+
+var data$1 = { $id:"/gpif/note-property",
+  type:"object",
+  properties:{ node:{ constant:"property" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ name:{ type:"string",
+          "enum":[ "String",
+            "Fret",
+            "HarmonicType",
+            "HarmonicFret",
+            "Muted",
+            "PalmMuted",
+            "Slide",
+            "HopoOrigin",
+            "HopoDestination",
+            "Bended",
+            "BendOriginValue",
+            "BendOriginOffset",
+            "BendDestinationValue",
+            "BendMiddleOffset1",
+            "BendMiddleOffset2",
+            "BendDestinationOffset",
+            "BendMiddleValue",
+            "Element",
+            "Variation",
+            "Tone",
+            "Octave",
+            "Tapped",
+            "LeftHandTapped",
+            "ShowStringNumber",
+            "Midi" ] } } } },
+  select:{ $data:"0/attrs/name" },
+  selectCases:{ HopoOrigin:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    HopoDestination:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    Muted:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    PalmMuted:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    Bended:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    Tapped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    LeftHandTapped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    ShowStringNumber:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
+    BendOriginValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    BendOriginOffset:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    BendMiddleValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    BendMiddleOffset1:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    BendMiddleOffset2:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    BendDestinationValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
+    Fret:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        fret:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    String:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        string:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    HarmonicType:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        htype:{ type:"string",
+          "enum":[ "natural",
+            "pinch",
+            "artificial",
+            "tap",
+            "semi",
+            "feedback" ] } } },
+    HarmonicFret:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        hfret:{ type:"string",
+          typecast:{ type:"float" } } } },
+    Slide:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        flags:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    Element:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        element:{ type:"string" } } },
+    Variation:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        variation:{ type:"string" } } },
+    Tone:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        step:{ type:"string" } } },
+    Octave:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        number:{ type:"string",
+          typecast:{ type:"integer" } } } },
+    Midi:{ additionalProperties:false,
+      properties:{ node:{},
+        attrs:{},
+        number:{ type:"string",
+          typecast:{ type:"integer" } } } } } };
+data$1.$id;
+data$1.type;
+data$1.properties;
+data$1.select;
+data$1.selectCases;
+
+var data = { $id:"/gpif/rhythm",
+  type:"object",
+  additionalProperties:false,
+  properties:{ node:{ constant:"rhythm" },
+    attrs:{ type:"object",
+      additionalProperties:false,
+      properties:{ id:{ type:"string" } } },
+    notevalue:{ type:"string",
+      "enum":[ "whole",
+        "half",
+        "quarter",
+        "eighth",
+        "16th",
+        "32nd",
+        "64th",
+        "128th" ] },
+    primarytuplet:{ $ref:"#/definitions/PrimaryTuplet" },
+    augmentationdot:{ $ref:"#/definitions/AugmentationDot" } },
+  definitions:{ AugmentationDot:{ additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ count:{ type:"string",
+              typecast:{ type:"integer" } } } } } },
+    PrimaryTuplet:{ additionalProperties:false,
+      properties:{ attrs:{ type:"object",
+          additionalProperties:false,
+          properties:{ num:{ type:"string",
+              typecast:{ type:"integer" } },
+            den:{ type:"string",
+              typecast:{ type:"integer" } } } } } } } };
+data.$id;
+data.type;
+data.additionalProperties;
+data.properties;
+data.definitions;
+
+require('ajv');
+var itemsCountKeyword = {
+    type: 'array',
+    errors: false,
+    validate: function (count, data) {
+        return data.length === count;
+    }
+};
+
+require('ajv');
+const NUMBERS_STRING_PATTERN = /^([0-9e\-\.]+)|(-?1\.\#(ind|qnan|snan|inf))?$/;
+var numbersStringKeyword = {
+    type: 'string',
+    errors: false,
+    validate: function (enabled, data) {
+        if (!enabled || data == '') {
+            return true;
+        }
+        return NUMBERS_STRING_PATTERN.test(data);
+    }
+};
+
+const Ajv$1 = require('ajv');
+var Types;
+(function (Types) {
+    Types["Number"] = "number";
+    Types["Float"] = "float";
+    Types["Integer"] = "integer";
+    Types["Boolean"] = "boolean";
+})(Types || (Types = {}));
+var typecastKeyword = {
+    type: 'string',
+    errors: true,
+    validate: function (schema, data, parentSchema, dataPath) {
+        try {
+            switch (schema.type) {
+                case Types.Number:
+                case Types.Float:
+                case Types.Integer:
+                    return validateAsNumber(schema, data);
+                case Types.Boolean:
+                    return validateAsBoolean(schema, data);
+                default:
+                    throw {
+                        keyword: 'type',
+                        message: `Unknown type ${schema.type}`
+                    };
+            }
+        }
+        catch (e) {
+            const { keyword, message } = e;
+            throw new Ajv$1.ValidationError({
+                message,
+                keyword: `typecast.${keyword}`,
+                dataPath,
+                data
+            });
+        }
+        return false;
+    }
+};
+function validateAsNumber(schema, data) {
+    const value = +data;
+    if (parseFloat(data) !== value) {
+        throw { keyword: 'type', message: `Not a number` };
+    }
+    if (schema.type == Types.Integer) {
+        if (Number.isInteger(value) == false)
+            throw { keyword: 'type', message: `Not an integer` };
+    }
+    if (schema.minimum) {
+        if (value < schema.minimum)
+            throw { keyword: 'minimum', message: `Must be bigger than ${schema.minimum}` };
+    }
+    if (schema.maximum) {
+        if (value > schema.maximum)
+            throw { keyword: 'maximum', message: `Must be less than ${schema.maximum}` };
+    }
+    if (schema.range) {
+        if (value < schema.range[0] || value > schema.range[1])
+            throw { keyword: 'range', message: `Must be between ${schema.range[0]} and ${schema.range[1]}` };
+    }
+    return true;
+}
+function validateAsBoolean(schema, data) {
+    if (data !== 'true' && data !== 'false') {
+        return false;
+    }
+    return true;
+}
+
+const Ajv = require('ajv');
+const ajv = new Ajv({
+    v5: true,
+    allErrors: true,
+    verbose: true,
+    $data: true
+});
+require('ajv-keywords')(ajv, 'select');
+const schemas = [
+    data$i,
+    data$h,
+    data$g,
+    data$f,
+    data$d,
+    data$e,
+    data$c,
+    data$b,
+    data$a,
+    data$9,
+    data$7,
+    data$8,
+    data$6,
+    data$4,
+    data$5,
+    data$3,
+    data$2,
+    data$1,
+    data
+];
+ajv.addSchema(schemas);
+ajv.addKeyword('itemsCount', itemsCountKeyword);
+ajv.addKeyword('numbersString', numbersStringKeyword);
+ajv.addKeyword('typecast', typecastKeyword);
+
+function validate(schemaName, data) {
+    const validator = ajv.getSchema(schemaName);
+    if (!validator) {
+        throw new Error(`Schema ${schemaName} couldn't be found`);
+    }
+    const isValid = Boolean(validator(data));
+    if (!isValid) {
+        throw validator.errors;
+    }
+    return isValid;
 }
 
 var main = {};
@@ -1749,7 +3035,9 @@ function decompressBlock(bin, isSkipHeader = false) {
         }
     }
     catch (e) {
-        console.error('End of Block Exception', e);
+        if (typeof process__namespace !== 'undefined') {
+            console.error('End of Block Exception -', e);
+        }
     }
     const resultOffset = isSkipHeader ? 4 : 0;
     const resultSize = temp.byteLength - resultOffset;
@@ -2325,1303 +3613,33 @@ function parseGpx(blob) {
     };
 }
 
-var data$i = { $id:"/gpx-root",
-  type:"object",
-  required:[ "gpif" ],
-  properties:{ gpif:{ $ref:"/gpif" } } };
-data$i.$id;
-data$i.type;
-data$i.required;
-data$i.properties;
-
-var data$h = { $id:"/gpif",
-  type:"object",
-  additionalProperties:false,
-  required:[ "gprevision",
-    "score",
-    "mastertrack",
-    "masterbars",
-    "tracks",
-    "bars",
-    "voices",
-    "beats",
-    "notes",
-    "rhythms" ],
-  properties:{ gprevision:{ type:"string",
-      typecast:{ type:"number" } },
-    score:{ $ref:"/gpif/score" },
-    mastertrack:{ $ref:"/gpif/master-track" },
-    masterbars:{ $ref:"#/definitions/List<MasterBar>" },
-    tracks:{ $ref:"#/definitions/List<Track>" },
-    bars:{ $ref:"#/definitions/List<Bar>" },
-    voices:{ $ref:"#/definitions/List<Voice>" },
-    beats:{ $ref:"#/definitions/List<Beat>" },
-    notes:{ $ref:"#/definitions/List<Note>" },
-    rhythms:{ $ref:"#/definitions/List<Rhythm>" } },
-  definitions:{ "List<MasterBar>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/master-bar" } } } },
-    "List<Track>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/track" } } } },
-    "List<Bar>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/bar" } } } },
-    "List<Voice>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/voice" } } } },
-    "List<Beat>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/beat" } } } },
-    "List<Note>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/note" } } } },
-    "List<Rhythm>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/rhythm" } } } } } };
-data$h.$id;
-data$h.type;
-data$h.additionalProperties;
-data$h.required;
-data$h.properties;
-data$h.definitions;
-
-var data$g = { $id:"/gpif/common",
-  definitions:{ Lyrics:{ type:"object",
-      additionalProperties:false,
-      required:[ "items" ],
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ dispatched:{ type:"string",
-              typecast:{ type:"boolean" } } } },
-        items:{ type:"array",
-          items:{ $ref:"#/definitions/LyricsLine" } } } },
-    LyricsLine:{ type:"object",
-      additionalProperties:false,
-      required:[ "node" ],
-      properties:{ node:{ constant:"line" },
-        offset:{ type:"string",
-          typecast:{ type:"integer" } },
-        text:{ type:[ "string",
-            "boolean" ] },
-        value:{ type:"string" } } },
-    Ottavia:{ type:"string",
-      "enum":[ "8va",
-        "8vb",
-        "15ma",
-        "15mb" ] } } };
-data$g.$id;
-data$g.definitions;
-
-var data$f = { $id:"/gpif/props",
-  definitions:{ BooleanProperty:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        enable:{ type:"boolean" } } },
-    FloatProperty:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        "float":{ type:"string",
-          typecast:{ type:"float" } } } },
-    FretProperty:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        fret:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    StringProperty:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        string:{ type:"string",
-          typecast:{ type:"float" } } } },
-    XProperty:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"xproperty" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ id:{ type:"string" } } },
-        "int":{ type:"string" },
-        "float":{ type:"string" },
-        "double":{ type:"string" } } },
-    "List<XProperty>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/props#/definitions/XProperty" } } } } } };
-data$f.$id;
-data$f.definitions;
-
-var data$e = { $id:"/gpif/score",
-  type:"object",
-  additionalProperties:false,
-  properties:{ title:{ type:"string" },
-    subtitle:{ type:"string" },
-    artist:{ type:"string" },
-    album:{ type:"string" },
-    words:{ type:"string" },
-    music:{ type:"string" },
-    wordsandmusic:{ type:"string" },
-    copyright:{ type:"string" },
-    tabber:{ type:"string" },
-    instructions:{ type:"string" },
-    notices:{ type:"string" },
-    multivoice:{ type:"string",
-      "enum":[ "0>",
-        "1>" ] },
-    firstpagefooter:{},
-    firstpageheader:{},
-    pageheader:{},
-    pagefooter:{},
-    pagesetup:{},
-    scoresystemsdefaultlayout:{},
-    scoresystemslayout:{} } };
-data$e.$id;
-data$e.type;
-data$e.additionalProperties;
-data$e.properties;
-
-var data$d = { $id:"/gpif/rse",
-  type:"object",
-  additionalProperties:false,
-  properties:{ bank:{ type:"string" },
-    channelstrip:{ $ref:"#/definitions/Channelstrip" },
-    effectchains:{ $ref:"#/definitions/List<EffectChain>" },
-    bankchanges:{ $ref:"#/definitions/List<BankChange>" },
-    pickups:{ $ref:"#/definitions/List<Pickup>" } },
-  definitions:{ Channelstrip:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ version:{ type:"string",
-              "enum":[ "E56" ] } } },
-        automations:{ $ref:"#/definitions/List<Automation>" },
-        parameters:{ type:"string" },
-        bypassedautomations:{ type:"string",
-          pattern:"^(dspparam_11|dspparam_12|[\\s])+$" } } },
-    EffectChain:{ type:"object",
-      additionalProperties:false,
-      properties:{ name:{ type:"string" },
-        node:{ constant:"effectchain" },
-        rail:{ $ref:"#/definitions/Rail" } } },
-    Rail:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ name:{ type:"string" } } },
-        items:{ type:"array",
-          items:{ $ref:"#/definitions/RailEffect" } } } },
-    RailEffect:{ allOf:[ { $ref:"#/definitions/Effect" },
-        { type:"object",
-          properties:{ attrs:{ type:"object",
-              additionalProperties:false,
-              properties:{ id:{ type:"string" } } } } } ] },
-    Effect:{ type:"object",
-      additionalProperties:false,
-      required:[ "node" ],
-      properties:{ node:{ constant:"effect" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ id:{ type:"string" } } },
-        bypass:{ type:"boolean" },
-        bypassedautomations:{ type:"string",
-          pattern:"^(dspparam_00|dspparam_01|dspparam_11|dspparam_12)+$" },
-        parameters:{ type:"string",
-          numbersString:true },
-        automations:{ $ref:"#/definitions/List<Automation>" } } },
-    Automation:{ type:"object",
-      additionalProperties:false,
-      required:[ "node",
-        "type",
-        "bar",
-        "position",
-        "value" ],
-      properties:{ node:{ "const":"automation" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ id:{ type:"string" } } },
-        type:{ type:"string",
-          "enum":[ "tempo",
-            "dspparam_00",
-            "dspparam_01",
-            "dspparam_11",
-            "dspparam_12" ] },
-        linear:{ type:"string",
-          typecast:{ type:"boolean" } },
-        visible:{ type:"string",
-          typecast:{ type:"boolean" } },
-        bar:{ type:"string",
-          typecast:{ type:"integer" } },
-        position:{ type:"string",
-          typecast:{ type:"float",
-            minimum:0,
-            maximum:1 } },
-        text:{ type:"string" },
-        value:{ type:"string",
-          numbersString:true } } },
-    Pickup:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"pickup" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ id:{ type:"string" },
-            tone:{ type:"string",
-              typecast:{ type:"float" } },
-            volume:{ type:"string",
-              typecast:{ type:"float" } } } } } },
-    BankChange:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"bankchange" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ barindex:{ type:"string",
-              typecast:{ type:"integer" } },
-            tickoffset:{ type:"string",
-              typecast:{ type:"integer" } },
-            bankid:{ type:"string" } } },
-        pickups:{ $ref:"#/definitions/List<Pickup>" } } },
-    "List<Automation>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/Automation" } } } },
-    "List<EffectChain>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/EffectChain" } } } },
-    "List<Pickup>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/Pickup" } } } },
-    "List<BankChange>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/BankChange" } } } } } };
-data$d.$id;
-data$d.type;
-data$d.additionalProperties;
-data$d.properties;
-data$d.definitions;
-
-var data$c = { $id:"/gpif/chord-collection",
-  type:"object",
-  properties:{ items:{ type:"array",
-      items:{ $ref:"#/definitions/ChordCollectionItem" } } },
-  definitions:{ ChordCollectionItem:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"item" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ id:{ type:"string" },
-            name:{ type:"string" } } },
-        chord:{ $ref:"#/definitions/Chord" } } },
-    Chord:{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/ChordPart" } } } },
-    ChordPart:{ type:"object",
-      properties:{ node:{ type:"string",
-          "enum":[ "keynote",
-            "bassnote",
-            "degree" ] } },
-      select:{ $data:"0/node" },
-      selectCases:{ keynote:{ $ref:"/gpif/chord-collection#/definitions/KeyNote" },
-        bassnote:{ $ref:"/gpif/chord-collection#/definitions/BassNote" },
-        degree:{ $ref:"/gpif/chord-collection#/definitions/Degree" } } },
-    KeyNote:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"keynote" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ accidental:{ $ref:"#/definitions/Accidental" },
-            step:{ $ref:"#/definitions/Step" } } } } },
-    BassNote:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"bassnote" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ accidental:{ $ref:"#/definitions/Accidental" },
-            step:{ $ref:"#/definitions/Step" } } } } },
-    Degree:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"degree" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ alteration:{ type:"string",
-              "enum":[ "Perfect",
-                "Minor",
-                "Major",
-                "Diminished",
-                "Augmented" ] },
-            interval:{ type:"string",
-              "enum":[ "Second",
-                "Third",
-                "Fourth",
-                "Fifth",
-                "Sixth",
-                "Seventh",
-                "Eighth",
-                "Ninth",
-                "Eleventh",
-                "Thirteenth" ] },
-            omitted:{ type:"string",
-              typecast:{ type:"boolean" } } } } } },
-    Accidental:{ type:"string",
-      "enum":[ "natural",
-        "flat",
-        "sharp",
-        "doublesharp",
-        "doubleflat" ] },
-    Step:{ type:"string",
-      pattern:"^[A-G]$" } } };
-data$c.$id;
-data$c.type;
-data$c.properties;
-data$c.definitions;
-
-var data$b = { $id:"/gpif/diagram-collection",
-  properties:{ items:{ type:"array",
-      items:{ $ref:"#/definitions/DiagramCollectionItem" } } },
-  definitions:{ DiagramCollectionItem:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"item" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ id:{ type:"string" },
-            name:{ type:"string" } } },
-        diagram:{ $ref:"#/definitions/Diagram" },
-        chord:{ $ref:"/gpif/chord-collection#/definitions/Chord" } } },
-    Diagram:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ barsstates:{ type:"string",
-              numbersString:true },
-            basefret:{ type:"string",
-              typecast:{ type:"integer" } },
-            fretcount:{ type:"string",
-              typecast:{ type:"integer" } },
-            stringcount:{ type:"string",
-              typecast:{ type:"integer" } } } },
-        items:{ type:"array",
-          items:{ $ref:"#/definitions/DiagramPart" } } } },
-    DiagramPart:{ type:"object",
-      properties:{ node:{ type:"string",
-          "enum":[ "property",
-            "fingering",
-            "fret" ] } },
-      select:{ $data:"0/node" },
-      selectCases:{ property:{ $ref:"/gpif/diagram-collection#/definitions/DiagramProperty" },
-        fingering:{ $ref:"/gpif/diagram-collection#/definitions/Fingering" },
-        fret:{ $ref:"/gpif/diagram-collection#/definitions/Fret" } } },
-    DiagramProperty:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"property" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ name:{ type:"string",
-              "enum":[ "ShowFingering" ] },
-            type:{ type:"string",
-              "enum":[ "bool" ] },
-            value:{ type:"string",
-              typecast:{ type:"boolean" } } } } } },
-    Fret:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"fret" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ fret:{ type:"string",
-              typecast:{ type:"integer" } },
-            string:{ type:"string",
-              typecast:{ type:"integer" } } } } } },
-    Fingering:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"fingering" },
-        items:{ type:"array",
-          items:{ $ref:"#/definitions/Position" } } } },
-    Position:{ type:"object",
-      additionalProperties:false,
-      properties:{ node:{ constant:"position" },
-        attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ finger:{ type:"string",
-              "enum":[ "Thumb",
-                "Index",
-                "Middle",
-                "Ring",
-                "Pinky",
-                "None" ] },
-            fret:{ type:"string",
-              typecast:{ type:"integer" } },
-            string:{ type:"string",
-              typecast:{ type:"integer" } } } } } } } };
-data$b.$id;
-data$b.properties;
-data$b.definitions;
-
-var data$a = { $id:"/gpif/master-track",
-  type:"object",
-  additionalProperties:false,
-  required:[ "tracks" ],
-  properties:{ anacrusis:{ type:"boolean" },
-    tracks:{ type:"string",
-      numbersString:true },
-    automations:{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/MasterAutomation" } } } },
-    rse:{ $ref:"#/definitions/MasterRse" } },
-  definitions:{ MasterRse:{ type:"object",
-      additionalProperties:false,
-      required:[ "master" ],
-      properties:{ master:{ type:"object",
-          properties:{ items:{ type:"array",
-              items:{ $ref:"#/definitions/MasterEffect" } } } } } },
-    MasterAutomation:{ allOf:[ { $ref:"/gpif/rse#/definitions/Automation" },
-        { type:"object",
-          properties:{ type:{ constant:"tempo" } } } ] },
-    MasterEffect:{ allOf:[ { $ref:"/gpif/rse#/definitions/Effect" },
-        { type:"object",
-          properties:{ attrs:{ type:"object",
-              additionalProperties:false,
-              properties:{ id:{ type:"string",
-                  "enum":[ "I01_VolumeAndPan",
-                    "M01_StudioReverbHallConcertHall",
-                    "M02_StudioReverbHallSmallTheater",
-                    "M03_StudioReverbRoomStudioA",
-                    "M04_StudioReverbRoomAmbience",
-                    "M05_StudioReverbPlatePercussive",
-                    "M06_DynamicAnalogDynamic",
-                    "M08_GraphicEQ10Band" ] } } } } } ] } } };
-data$a.$id;
-data$a.type;
-data$a.additionalProperties;
-data$a.required;
-data$a.properties;
-data$a.definitions;
-
-var data$9 = { $id:"/gpif/master-bar",
-  type:"object",
-  additionalProperties:false,
-  required:[ "bars" ],
-  properties:{ node:{ constant:"masterbar" },
-    alternateendings:{ type:"string",
-      numbersString:true },
-    bars:{ type:"string",
-      numbersString:true },
-    time:{ type:"string",
-      pattern:"^[0-9]{1,2}\\/[0-9]{1,3}$" },
-    freetime:{ type:"boolean" },
-    doublebar:{ type:"boolean" },
-    tripletfeel:{ type:"string",
-      "enum":[ "triplet8th",
-        "triplet16th",
-        "dotted16th",
-        "dotted8th",
-        "scottish8th",
-        "scottish16th" ] },
-    key:{ $ref:"#/definitions/Key" },
-    repeat:{ $ref:"#/definitions/Repeat" },
-    section:{ $ref:"#/definitions/Section" },
-    fermatas:{ $ref:"#/definitions/List<Fermata>" },
-    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" },
-    directions:{ $ref:"#/definitions/List<Direction>" } },
-  definitions:{ Key:{ type:"object",
-      additionalProperties:false,
-      required:[ "accidentalcount",
-        "mode" ],
-      properties:{ accidentalcount:{ type:"string",
-          typecast:{ type:"integer",
-            minimum:-7,
-            maximum:7 } },
-        mode:{ type:"string",
-          "enum":[ "minor",
-            "major" ] } } },
-    Repeat:{ type:"object",
-      additionalProperties:false,
-      required:[ "attrs" ],
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          required:[ "start",
-            "end" ],
-          properties:{ count:{ type:"string",
-              typecast:{ type:"integer" } },
-            end:{ type:"string",
-              typecast:{ type:"boolean" } },
-            start:{ type:"string",
-              typecast:{ type:"boolean" } } } } } },
-    Section:{ type:"object",
-      additionalProperties:false,
-      properties:{ letter:{ type:"string" },
-        text:{ type:"string" } } },
-    Fermata:{ type:"object",
-      additionalProperties:false,
-      required:[ "node",
-        "type",
-        "offset",
-        "length" ],
-      properties:{ node:{ constant:"fermata" },
-        type:{ type:"string",
-          "enum":[ "medium",
-            "long",
-            "short" ] },
-        offset:{ type:"string",
-          pattern:"^[0-9]{1,2}\\/[0-9]{1,2}$" },
-        length:{ type:"string",
-          typecast:{ type:"float",
-            minimum:0,
-            maximum:1 } } } },
-    Direction:{ type:"object",
-      additionalProperties:false,
-      required:[ "node",
-        "value" ],
-      properties:{ node:{ type:"string",
-          "enum":[ "target",
-            "jump" ] },
-        value:{ type:"string",
-          "enum":[ "dacapo",
-            "dacoda",
-            "dadoublecoda",
-            "dacapoalfine",
-            "dacapoalcoda",
-            "dacapoaldoublecoda",
-            "dasegno",
-            "dasegnosegno",
-            "dasegnoalfine",
-            "dasegnoalcoda",
-            "dasegnoaldoublecoda",
-            "dasegnosegnoalfine",
-            "dasegnosegnoalcoda",
-            "dasegnosegnoaldoublecoda",
-            "fine",
-            "segno",
-            "coda",
-            "segnosegno",
-            "doublecoda" ] } } },
-    "List<Fermata>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/Fermata" } } } },
-    "List<Direction>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/Direction" } } } },
-    "List<MasterBarXProperty>":{ type:"object",
-      properties:{ items:{ type:"array",
-          items:{ $ref:"#/definitions/MasterBarXProperty" } } } } } };
-data$9.$id;
-data$9.type;
-data$9.additionalProperties;
-data$9.required;
-data$9.properties;
-data$9.definitions;
-
-var data$8 = { $id:"/gpif/track",
-  type:"object",
-  additionalProperties:false,
-  properties:{ node:{ constant:"track" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ id:{ type:"string" } } },
-    name:{ type:"string" },
-    shortname:{ type:"string" },
-    color:{ type:"string",
-      pattern:"^[0-9]{1,3} [0-9]{1,3} [0-9]{1,3}$" },
-    playbackstate:{ type:"string",
-      "enum":[ "default",
-        "mute",
-        "solo" ] },
-    playingstyle:{ type:"string",
-      "enum":[ "default",
-        "stringedfinger",
-        "stringedpick",
-        "stringedfingerpicking",
-        "drumkitstick",
-        "drumkitbrush",
-        "drumkithotrod",
-        "bassslap" ] },
-    palmmute:{ type:"string",
-      typecast:{ type:"float" } },
-    letringthroughout:{ type:"boolean" },
-    autoaccentuation:{ type:"string",
-      typecast:{ type:"float" } },
-    systemsdefautlayout:{ type:"string",
-      typecast:{ type:"integer" } },
-    systemslayout:{ type:"string",
-      numbersString:true },
-    lyrics:{ $ref:"/gpif/common#/definitions/Lyrics" },
-    rse:{ $ref:"/gpif/rse" },
-    properties:{ $ref:"#/definitions/List<TrackProperty>" },
-    generalmidi:{ $ref:"#/definitions/GeneralMidi" },
-    instrument:{ $ref:"#/definitions/Instrument" },
-    partsounding:{ $ref:"#/definitions/Partsounding" } },
-  definitions:{ GeneralMidi:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ table:{ type:"string",
-              "enum":[ "Instrument",
-                "Percussion" ] } } },
-        port:{ type:"string",
-          typecast:{ type:"integer",
-            minimum:0,
-            maximum:3 } },
-        primarychannel:{ type:"string",
-          typecast:{ type:"integer",
-            minimum:0,
-            maximum:16 } },
-        program:{ type:"string",
-          typecast:{ type:"integer",
-            minimum:0,
-            maximum:127 } },
-        secondarychannel:{ type:"string",
-          typecast:{ type:"integer",
-            minimum:0,
-            maximum:16 } },
-        foreonechannelperstring:{ type:"string",
-          typecast:{ type:"boolean" } } } },
-    Instrument:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ ref:{ type:"string" } } } } },
-    Partsounding:{ type:"object",
-      additionalProperties:false,
-      properties:{ nominalkey:{ type:"string",
-          pattern:"^neutral|([b]?[a-g](\\s(bass|alto|soprano|sopranino|baritone|tenor))?)$" },
-        transpositionpitch:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    "List<TrackProperty>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/track-property" } } } } } };
-data$8.$id;
-data$8.type;
-data$8.additionalProperties;
-data$8.properties;
-data$8.definitions;
-
-var data$7 = { $id:"/gpif/track-property",
-  type:"object",
-  properties:{ node:{ constant:"property" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ name:{ type:"string",
-          "enum":[ "Tuning",
-            "TuningFlat",
-            "AutoBrush",
-            "CapoFret",
-            "PartialCapoFret",
-            "PartialCapoStringFlags",
-            "DiagramCollection",
-            "DiagramWorkingSet",
-            "ChordCollection",
-            "ChordWorkingSet" ] } } } },
-  select:{ $data:"0/attrs/name" },
-  selectCases:{ AutoBrush:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    Tuning:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        pitches:{ type:"string",
-          pattern:"^([0-9]+|\\s)+$" } } },
-    TuningFlat:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    CapoFret:{ $ref:"/gpif/props#/definitions/FretProperty" },
-    PartialCapoFret:{ $ref:"/gpif/props#/definitions/FretProperty" },
-    PartialCapoStringFlags:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        flags:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    DiagramCollection:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        items:{ $ref:"/gpif/diagram-collection" } } },
-    DiagramWorkingSet:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        items:{ $ref:"/gpif/diagram-collection" } } },
-    ChordCollection:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        items:{ $ref:"/gpif/chord-collection" } } },
-    ChordWorkingSet:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        items:{ $ref:"/gpif/chord-collection" } } } } };
-data$7.$id;
-data$7.type;
-data$7.properties;
-data$7.select;
-data$7.selectCases;
-
-var data$6 = { $id:"/gpif/bar",
-  type:"object",
-  additionalProperties:false,
-  properties:{ node:{ constant:"bar" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ id:{ type:"string" } } },
-    clef:{ type:"string",
-      "enum":[ "neutral",
-        "g2",
-        "c3",
-        "c4",
-        "f4" ] },
-    ottavia:{ $ref:"/gpif/common#/definitions/Ottavia" },
-    similemark:{ type:"string",
-      "enum":[ "simple",
-        "firstofdouble",
-        "secondofdouble" ] },
-    voices:{ type:"string",
-      numbersString:true },
-    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" } } };
-data$6.$id;
-data$6.type;
-data$6.additionalProperties;
-data$6.properties;
-
-var data$5 = { $id:"/gpif/beat",
-  type:"object",
-  additionalProperties:false,
-  properties:{ node:{ constant:"beat" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ id:{ type:"string" } } },
-    freetext:{ type:"string" },
-    dynamic:{ type:"string",
-      "enum":[ "ppp",
-        "pp",
-        "p",
-        "mp",
-        "mf",
-        "f",
-        "ff",
-        "fff" ] },
-    ottavia:{ $ref:"/gpif/common#/definitions/Ottavia" },
-    hairpin:{ type:"string",
-      "enum":[ "crescendo",
-        "decrescendo" ] },
-    arpeggio:{ type:"string",
-      "enum":[ "down",
-        "up" ] },
-    fadding:{ type:"string",
-      "enum":[ "fadein",
-        "fadeout",
-        "volumeswell" ] },
-    slashed:{ type:"boolean" },
-    bank:{ type:"string" },
-    timer:{ type:"string",
-      typecast:{ type:"integer" } },
-    tremolo:{ type:"string",
-      "enum":[ "1/2",
-        "1/4",
-        "1/8" ] },
-    variation:{ type:"string",
-      typecast:{ type:"integer" } },
-    wah:{ type:"string",
-      "enum":[ "open",
-        "closed" ] },
-    gracenotes:{ type:"string",
-      "enum":[ "beforebeat",
-        "onbeat" ] },
-    notes:{ type:"string",
-      numbersString:true },
-    chord:{ type:"string",
-      numbersString:"string" },
-    legato:{ $ref:"#/definitions/Legato" },
-    rhythm:{ $ref:"#/definitions/RhythmLink" },
-    lyrics:{ $ref:"/gpif/common#/definitions/Lyrics" },
-    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" },
-    properties:{ $ref:"#/definitions/List<BeatProperty>" } },
-  definitions:{ RhythmLink:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ ref:{ type:"string" } } } } },
-    Legato:{ type:"object",
-      additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ origin:{ type:"string",
-              typecast:{ type:"boolean" } },
-            destination:{ type:"string",
-              typecast:{ type:"boolean" } } } } } },
-    "List<BeatProperty>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/beat-property" } } } } } };
-data$5.$id;
-data$5.type;
-data$5.additionalProperties;
-data$5.properties;
-data$5.definitions;
-
-var data$4 = { $id:"/gpif/beat-property",
-  type:"object",
-  properties:{ node:{ constant:"property" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ name:{ type:"string",
-          "enum":[ "Brush",
-            "Rasgueado",
-            "Popped",
-            "Slapped",
-            "PickStroke",
-            "BarreFret",
-            "BarreString",
-            "VibratoWTremBar",
-            "WhammyBar",
-            "WhammyBarOriginValue",
-            "WhammyBarOriginOffset",
-            "WhammyBarMiddleValue",
-            "WhammyBarMiddleOffset1",
-            "WhammyBarMiddleOffset2",
-            "WhammyBarDestinationValue",
-            "WhammyBarDestinationOffset",
-            "WhammyBarExtend" ] } } } },
-  select:{ $data:"0/attrs/name" },
-  selectCases:{ WhammyBar:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    WhammyBarExtend:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    WhammyBarOriginValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    WhammyBarOriginOffset:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    WhammyBarMiddleValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    WhammyBarMiddleOffset1:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    WhammyBarMiddleOffset2:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    WhammyBarDestinationValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    WhammyBarDestinationOffset:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    Brush:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        direction:{ type:"string",
-          "enum":[ "up",
-            "down" ] } } },
-    PickStroke:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        direction:{ type:"string",
-          "enum":[ "up",
-            "down" ] } } },
-    Rasgueado:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        rasgueado:{ type:"string",
-          "enum":[ "ii_1",
-            "mi_1",
-            "mii_1",
-            "mii_2",
-            "pmp_1",
-            "pmp_2",
-            "pei_1",
-            "pei_2",
-            "pai_1",
-            "pai_2",
-            "ami_1",
-            "ami_2",
-            "ppp_1",
-            "amii_1",
-            "amip_1",
-            "eami_1",
-            "eamii_1",
-            "peami_1" ] } } },
-    Popped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    Slapped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    BarreFret:{ $ref:"/gpif/props#/definitions/FretProperty" },
-    BarreString:{ $ref:"/gpif/props#/definitions/StringProperty" },
-    VibratoWTremBar:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        strength:{ type:"string",
-          "enum":[ "slight",
-            "wide" ] } } } } };
-data$4.$id;
-data$4.type;
-data$4.properties;
-data$4.select;
-data$4.selectCases;
-
-var data$3 = { $id:"/gpif/voice",
-  type:"object",
-  additionalProperties:false,
-  properties:{ node:{ constant:"voice" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ id:{ type:"string" } } },
-    beats:{ type:"string",
-      numbersString:true } } };
-data$3.$id;
-data$3.type;
-data$3.additionalProperties;
-data$3.properties;
-
-var data$2 = { $id:"/gpif/note",
-  type:"object",
-  additionalProperties:false,
-  properties:{ node:{ constant:"note" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ id:{ type:"string" } } },
-    letring:{ type:"boolean" },
-    vibrato:{ type:"string",
-      "enum":[ "slight",
-        "wide" ] },
-    trill:{ type:"string",
-      typecast:{ type:"integer",
-        minimum:37,
-        maximum:100 } },
-    accent:{ type:"string",
-      typecast:{ type:"float" } },
-    ornament:{ type:"string",
-      "enum":[ "uppermordent",
-        "lowermordent",
-        "turn",
-        "invertedturn" ] },
-    antiaccent:{ type:"string",
-      "enum":[ "normal" ] },
-    leftfingering:{ type:"string",
-      "enum":[ "open",
-        "p",
-        "i",
-        "m",
-        "a",
-        "c" ] },
-    rightfingering:{ type:"string",
-      "enum":[ "open",
-        "p",
-        "i",
-        "m",
-        "a",
-        "c" ] },
-    accidental:{ type:"string",
-      "enum":[ "natural",
-        "sharp",
-        "flat",
-        "doublesharp",
-        "doubleflat" ] },
-    tie:{ type:"object",
-      properties:{ attrs:{ type:"object",
-          properties:{ origin:{ type:"string",
-              typecast:{ type:"boolean" } },
-            destination:{ type:"string",
-              typecast:{ type:"boolean" } } } } } },
-    glide:{ type:"object",
-      properties:{ type:{ type:"string",
-          "enum":[ "None" ] },
-        origin:{ type:"string",
-          typecast:{ type:"integer" } },
-        destination:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    xproperties:{ $ref:"/gpif/props#/definitions/List<XProperty>" },
-    properties:{ $ref:"#/definitions/List<NoteProperty>" } },
-  definitions:{ "List<NoteProperty>":{ type:"object",
-      additionalProperties:false,
-      properties:{ items:{ type:"array",
-          items:{ $ref:"/gpif/note-property" } } } } } };
-data$2.$id;
-data$2.type;
-data$2.additionalProperties;
-data$2.properties;
-data$2.definitions;
-
-var data$1 = { $id:"/gpif/note-property",
-  type:"object",
-  properties:{ node:{ constant:"property" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ name:{ type:"string",
-          "enum":[ "String",
-            "Fret",
-            "HarmonicType",
-            "HarmonicFret",
-            "Muted",
-            "PalmMuted",
-            "Slide",
-            "HopoOrigin",
-            "HopoDestination",
-            "Bended",
-            "BendOriginValue",
-            "BendOriginOffset",
-            "BendDestinationValue",
-            "BendMiddleOffset1",
-            "BendMiddleOffset2",
-            "BendDestinationOffset",
-            "BendMiddleValue",
-            "Element",
-            "Variation",
-            "Tone",
-            "Octave",
-            "Tapped",
-            "LeftHandTapped",
-            "ShowStringNumber",
-            "Midi" ] } } } },
-  select:{ $data:"0/attrs/name" },
-  selectCases:{ HopoOrigin:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    HopoDestination:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    Muted:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    PalmMuted:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    Bended:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    Tapped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    LeftHandTapped:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    ShowStringNumber:{ $ref:"/gpif/props#/definitions/BooleanProperty" },
-    BendOriginValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    BendOriginOffset:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    BendMiddleValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    BendMiddleOffset1:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    BendMiddleOffset2:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    BendDestinationValue:{ $ref:"/gpif/props#/definitions/FloatProperty" },
-    Fret:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        fret:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    String:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        string:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    HarmonicType:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        htype:{ type:"string",
-          "enum":[ "natural",
-            "pinch",
-            "artificial",
-            "tap",
-            "semi",
-            "feedback" ] } } },
-    HarmonicFret:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        hfret:{ type:"string",
-          typecast:{ type:"float" } } } },
-    Slide:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        flags:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    Element:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        element:{ type:"string" } } },
-    Variation:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        variation:{ type:"string" } } },
-    Tone:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        step:{ type:"string" } } },
-    Octave:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        number:{ type:"string",
-          typecast:{ type:"integer" } } } },
-    Midi:{ additionalProperties:false,
-      properties:{ node:{},
-        attrs:{},
-        number:{ type:"string",
-          typecast:{ type:"integer" } } } } } };
-data$1.$id;
-data$1.type;
-data$1.properties;
-data$1.select;
-data$1.selectCases;
-
-var data = { $id:"/gpif/rhythm",
-  type:"object",
-  additionalProperties:false,
-  properties:{ node:{ constant:"rhythm" },
-    attrs:{ type:"object",
-      additionalProperties:false,
-      properties:{ id:{ type:"string" } } },
-    notevalue:{ type:"string",
-      "enum":[ "whole",
-        "half",
-        "quarter",
-        "eighth",
-        "16th",
-        "32nd",
-        "64th",
-        "128th" ] },
-    primarytuplet:{ $ref:"#/definitions/PrimaryTuplet" },
-    augmentationdot:{ $ref:"#/definitions/AugmentationDot" } },
-  definitions:{ AugmentationDot:{ additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ count:{ type:"string",
-              typecast:{ type:"integer" } } } } } },
-    PrimaryTuplet:{ additionalProperties:false,
-      properties:{ attrs:{ type:"object",
-          additionalProperties:false,
-          properties:{ num:{ type:"string",
-              typecast:{ type:"integer" } },
-            den:{ type:"string",
-              typecast:{ type:"integer" } } } } } } } };
-data.$id;
-data.type;
-data.additionalProperties;
-data.properties;
-data.definitions;
-
-require('ajv');
-var itemsCountKeyword = {
-    type: 'array',
-    errors: false,
-    validate: function (count, data) {
-        return data.length === count;
-    }
-};
-
-require('ajv');
-const NUMBERS_STRING_PATTERN = /^([0-9e\-\.]+)|(-?1\.\#(ind|qnan|snan|inf))?$/;
-var numbersStringKeyword = {
-    type: 'string',
-    errors: false,
-    validate: function (enabled, data) {
-        if (!enabled || data == '') {
-            return true;
-        }
-        return NUMBERS_STRING_PATTERN.test(data);
-    }
-};
-
-const Ajv$1 = require('ajv');
-var Types;
-(function (Types) {
-    Types["Number"] = "number";
-    Types["Float"] = "float";
-    Types["Integer"] = "integer";
-    Types["Boolean"] = "boolean";
-})(Types || (Types = {}));
-var typecastKeyword = {
-    type: 'string',
-    errors: true,
-    validate: function (schema, data, parentSchema, dataPath) {
-        try {
-            switch (schema.type) {
-                case Types.Number:
-                case Types.Float:
-                case Types.Integer:
-                    return validateAsNumber(schema, data);
-                case Types.Boolean:
-                    return validateAsBoolean(schema, data);
-                default:
-                    throw {
-                        keyword: 'type',
-                        message: `Unknown type ${schema.type}`
-                    };
-            }
-        }
-        catch (e) {
-            const { keyword, message } = e;
-            throw new Ajv$1.ValidationError({
-                message,
-                keyword: `typecast.${keyword}`,
-                dataPath,
-                data
-            });
-        }
-        return false;
-    }
-};
-function validateAsNumber(schema, data) {
-    const value = +data;
-    if (parseFloat(data) !== value) {
-        throw { keyword: 'type', message: `Not a number` };
-    }
-    if (schema.type == Types.Integer) {
-        if (Number.isInteger(value) == false)
-            throw { keyword: 'type', message: `Not an integer` };
-    }
-    if (schema.minimum) {
-        if (value < schema.minimum)
-            throw { keyword: 'minimum', message: `Must be bigger than ${schema.minimum}` };
-    }
-    if (schema.maximum) {
-        if (value > schema.maximum)
-            throw { keyword: 'maximum', message: `Must be less than ${schema.maximum}` };
-    }
-    if (schema.range) {
-        if (value < schema.range[0] || value > schema.range[1])
-            throw { keyword: 'range', message: `Must be between ${schema.range[0]} and ${schema.range[1]}` };
-    }
-    return true;
-}
-function validateAsBoolean(schema, data) {
-    if (data !== 'true' && data !== 'false') {
-        return false;
-    }
-    return true;
-}
-
-const Ajv = require('ajv');
-const ajv = new Ajv({
-    v5: true,
-    allErrors: true,
-    verbose: true,
-    $data: true
-});
-require('ajv-keywords')(ajv, 'select');
-const schemas = [
-    data$i,
-    data$h,
-    data$g,
-    data$f,
-    data$d,
-    data$e,
-    data$c,
-    data$b,
-    data$a,
-    data$9,
-    data$7,
-    data$8,
-    data$6,
-    data$4,
-    data$5,
-    data$3,
-    data$2,
-    data$1,
-    data
-];
-ajv.addSchema(schemas);
-ajv.addKeyword('itemsCount', itemsCountKeyword);
-ajv.addKeyword('numbersString', numbersStringKeyword);
-ajv.addKeyword('typecast', typecastKeyword);
-
-function validate(schemaName, data) {
-    const validator = ajv.getSchema(schemaName);
-    if (!validator) {
-        throw new Error(`Schema ${schemaName} couldn't be found`);
-    }
-    const isValid = Boolean(validator(data));
-    if (!isValid) {
-        throw validator.errors;
-    }
-    return isValid;
-}
-
 cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
     .argument('<source-file>', 'Guitar Pro file (gpx)')
     .option('-t, --target-file <target-file>', 'Target file')
-    .option('-e, --env <env>', 'Enviroment')
     .option('-v, --validate <validate>', 'Validate')
-    .option('-d, --display-results <display-results>', 'Display results')
     .action(function (args, options, logger) {
     logger.info(`parse ${args.sourceFile}:`);
-    if (options.env) {
-        process.env[options.env] = options.env;
-    }
     return loadBinary(args.sourceFile)
         .then(blob => parseGpx(blob))
         .then(parsedData => {
         logger.info(`${args.sourceFile} has been parsed`, options);
         if (options.validate) {
-            logger.info('validate');
+            logger.info('Run validation');
             try {
                 validate('/gpx-root', parsedData);
+                logger.info('No validation errors found!');
             }
             catch (errors) {
                 logger.error('Errors', errors);
             }
-            logger.info('validated');
-        }
-        if (options.displayResults) {
-            logger.info(parsedData);
         }
         if (options.targetFile) {
             saveToFile(`${options.targetFile}.json`, parsedData.gpif, true);
             saveToFile(`${options.targetFile}.xml`, parsedData.xml.gpif);
+            logger.info(`Saved into ${options.targetFile}`, options);
+        }
+        else {
+            logger.info(parsedData.gpif);
         }
     })
         .catch(e => logger.error(e));
@@ -3629,15 +3647,11 @@ cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
 
 cli.command('bulk-check', 'Guitar Pro 6 files bulk check').alias('bc')
     .argument('<source-dir>', 'Source directory')
-    .option('-e, --env <env>', 'Enviroment')
     .option('-ff, --from-file <from-file>', 'Start from file')
     .option('-le, --errors-file <errors-file>', 'Error Details')
-    .option('--log-file <log-file>', 'Result log file')
+    .option('-lf, --log-file <log-file>', 'Result log file')
     .action(function (args, options, logger) {
     logger.info(`parse ${args.sourceDir}:`);
-    if (options.env) {
-        process.env[options.env] = options.env;
-    }
     let isStarted = options.fromFile
         ? false : true;
     const files = walkSync(args.sourceDir)
@@ -3681,9 +3695,6 @@ cli.command('collect-enums', 'Collect values').alias('ce')
     }
     if (options.maxItems) {
         maxItems = +options.maxItems;
-    }
-    if (options.env) {
-        process.env[options.env] = options.env;
     }
     let files = walkSync(args.sourceDir)
         .filter((filePath) => {

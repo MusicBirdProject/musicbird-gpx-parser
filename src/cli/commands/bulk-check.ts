@@ -1,21 +1,16 @@
 import path from 'path';
 import cli from '../cli';
 import { loadBinary, logCheckResult, walkSync, logError } from '../helpers';
+import { validate } from '../validation/validator';
 import { parseGpx } from '../../main';
-import { validate } from '../../validation/validator';
 
 export default cli.command('bulk-check', 'Guitar Pro 6 files bulk check').alias('bc')
     .argument('<source-dir>', 'Source directory')
-    .option('-e, --env <env>', 'Enviroment')
     .option('-ff, --from-file <from-file>', 'Start from file')
     .option('-le, --errors-file <errors-file>', 'Error Details')
-    .option('--log-file <log-file>', 'Result log file')
+    .option('-lf, --log-file <log-file>', 'Result log file')
     .action(function (args, options, logger) {
         logger.info(`parse ${args.sourceDir}:`);
-
-        if (options.env) {
-            process.env[options.env] = options.env;
-        }
 
         ///
 

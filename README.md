@@ -24,3 +24,38 @@ const parsedData: GPXRoot = await jBinary.load(file, commonTypes)
     .then(binary => binary.read('blob'))
     .then(blob => parseGpx(blob));
 ```
+
+## Contributing
+### CLI
+#### Prepare
+
+For using cli commands you need to:
+- Clone the repo
+- Build a cli bundle if it's not ```npm run build:cli```
+- Use ```bin/cli [command]``` to run a cli command
+
+#### Commands
+- **parse** Parses Guitar Pro 6 file
+```
+    argument: <source-file> // Guitar Pro file (gpx)
+    option: -t, --target-file <target-file> // Target file
+    option: -v, --validate <validate> // Validate
+```
+
+- **bulk-check** Validates a collection of gpx files and collect found errors
+```
+    argument: <source-dir> // Source directory:
+    option: -ff, --from-file <from-file> // Start from file
+    option: -le, --errors-file <errors-file> // Error Details
+    option: -lf, --log-file <log-file> // Result log file
+```
+
+- **collect-enums** Walks through a collection of gpx files and collects possible fields and values
+```
+    argument: <source-dir> // 'Source directory
+    option: --log-file <log-file> // Result log file
+    option: --state-file <state-file> // File with a previous result
+    option: --from-file <from-file> // From file number
+    option: --max-items <max-items> // Max values to collect for an each field
+    option: --max-files <max-files> // Max source files count
+```

@@ -13,6 +13,7 @@ export default cli.command('collect-enums', 'Collect values').alias('ce')
     .option('--max-files <max-files>', 'Max source files count')
     .action(function (args, options, logger) {
         logger.info(`collect ${args.sourceDir}:`);
+
         let summary = {
             lastId: 0
         };
@@ -23,10 +24,6 @@ export default cli.command('collect-enums', 'Collect values').alias('ce')
 
         if (options.maxItems) {
             maxItems = +options.maxItems;
-        }
-
-        if (options.env) {
-            process.env[options.env] = options.env;
         }
 
         ///

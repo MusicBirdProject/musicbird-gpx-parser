@@ -1,4 +1,5 @@
 import require$$0 from 'string_decoder';
+import * as process from 'process';
 
 var main = {};
 
@@ -1694,7 +1695,9 @@ function decompressBlock(bin, isSkipHeader = false) {
         }
     }
     catch (e) {
-        console.error('End of Block Exception', e);
+        if (typeof process !== 'undefined') {
+            console.error('End of Block Exception -', e);
+        }
     }
     const resultOffset = isSkipHeader ? 4 : 0;
     const resultSize = temp.byteLength - resultOffset;

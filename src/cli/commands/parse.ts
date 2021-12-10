@@ -1,20 +1,14 @@
 import cli from '../cli';
 import { loadBinary, saveToFile } from '../helpers';
+import { validate } from '../validation/validator';
 import { parseGpx } from '../../main';
-import { validate } from '../../validation/validator';
 
 export default cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
     .argument('<source-file>', 'Guitar Pro file (gpx)')
     .option('-t, --target-file <target-file>', 'Target file')
-    .option('-e, --env <env>', 'Enviroment')
     .option('-v, --validate <validate>', 'Validate')
-    .option('-d, --display-results <display-results>', 'Display results')
     .action(function (args, options, logger) {
         logger.info(`parse ${args.sourceFile}:`);
-
-        if (options.env) {
-            process.env[options.env] = options.env;
-        }
 
         ///
 
@@ -24,22 +18,21 @@ export default cli.command('parse', 'Guitar Pro 6 file parsing').alias('p')
                 logger.info(`${args.sourceFile} has been parsed`, options);
 
                 if (options.validate) {
-                    logger.info('validate');
+                    logger.info('Run validation');
                     try {
                         validate('/gpx-root', parsedData);
+                        logger.info('No validation errors found!');
                     } catch (errors) {
                         logger.error('Errors', errors);
                     }
-                    logger.info('validated');
-                }
-
-                if (options.displayResults) {
-                    logger.info(parsedData)
                 }
 
                 if (options.targetFile) {
                     saveToFile(`${options.targetFile}.json`, parsedData.gpif, true);
                     saveToFile(`${options.targetFile}.xml`, parsedData.xml.gpif);
+                    logger.info(`Saved into ${options.targetFile}`, options);
+                } else {
+                    logger.info(parsedData.gpif);
                 }
 
             })

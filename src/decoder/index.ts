@@ -1,5 +1,7 @@
-const jDataView = require('jdataview');
+import * as process from "process";
 import { readBitsReversed, getString } from './helpers';
+
+const jDataView = require('jdataview');
 
 ///
 
@@ -154,7 +156,9 @@ function decompressBlock(bin, isSkipHeader: boolean = false) {
         }
 
     } catch (e) {
-        console.error('End of Block Exception', e);
+        if (typeof process !== 'undefined') {
+            console.error('End of Block Exception -', e);
+        }
     }
 
     const resultOffset = isSkipHeader ? 4 : 0;

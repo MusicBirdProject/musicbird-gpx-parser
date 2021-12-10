@@ -1,5 +1,5 @@
 import { ajv } from './index';
-import { GPXRoot } from '../types';
+import { GPXRoot } from '../../types';
 
 ///
 
