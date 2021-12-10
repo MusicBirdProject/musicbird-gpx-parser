@@ -98,7 +98,9 @@ var data$h = { $id:"/gpif",
     "beats",
     "notes",
     "rhythms" ],
-  properties:{ gprevision:{ type:"string",
+  properties:{ gpversion:{ type:"string",
+      typecast:{ type:"number" } },
+    gprevision:{ type:"string",
       typecast:{ type:"number" } },
     score:{ $ref:"/gpif/score" },
     mastertrack:{ $ref:"/gpif/master-track" },
@@ -2961,9 +2963,9 @@ function decode(blob) {
 function handleBlock(bin) {
     const header = bin.getString(4);
     switch (header) {
-        case "BCFZ":
+        case 'BCFZ':
             return parseBlock(decompressBlock(bin, true));
-        case "BCFS":
+        case 'BCFS':
             return parseBlock(bin);
         default:
             throw `Bad Header: ${header} (unsupported format)`;
@@ -3103,8 +3105,7 @@ function gpifReducer(xmlTree) {
 }
 function defaultReducer(res, node) {
     const path = cursor.push(node.name) && cursor.join('.');
-    const data = mapNode(node, path);
-    res[node.name] = data;
+    res[node.name] = mapNode(node, path);
     cursor.pop();
     return res;
 }
@@ -3124,31 +3125,32 @@ function mapNode(node, path, isListItem = false) {
     const { value, attrs, children } = node;
     let temp;
     switch (true) {
-        case listNodes.includes(path):
+        case (listNodes.includes(path)):
             temp = {
                 items: getChildren(node).reduce(listReducer, [])
             };
             break;
-        case value !== undefined:
-            let newValue = value === null
-                ? void 0
-                : value;
-            if (lowercaseNodes.includes(path)) {
-                newValue = newValue ? newValue.toLowerCase() : void 0;
+        case (value !== undefined):
+            {
+                let newValue = value === null
+                    ? void 0
+                    : value;
+                if (lowercaseNodes.includes(path)) {
+                    newValue = newValue ? newValue.toLowerCase() : void 0;
+                }
+                temp = isListItem
+                    ? { node: node.name, value: newValue }
+                    : newValue;
             }
-            temp = isListItem
-                ? { node: node.name, value: newValue }
-                : newValue;
             break;
-        case !!children:
+        case Boolean(children):
             temp = children.reduce(defaultReducer, {});
             break;
-        default:
+        default: {
             temp = isListItem
                 ? { node: node.name }
-                : node.isSelfClosing
-                    ? true
-                    : '';
+                : node.isSelfClosing ? true : '';
+        }
     }
     if (attrs && Object.keys(attrs).length) {
         const newAttrs = mapAttrs(attrs, path);
