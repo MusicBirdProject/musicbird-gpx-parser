@@ -7,7 +7,7 @@ import { parseGpx } from '../../main';
 export default cli.command('bulk-check', 'Guitar Pro 6 files bulk check').alias('bc')
     .argument('<source-dir>', 'Source directory')
     .option('-ff, --from-file <from-file>', 'Start from file')
-    .option('-le, --errors-file <errors-file>', 'Error Details')
+    .option('-ef, --errors-file <errors-file>', 'Error Details')
     .option('-lf, --log-file <log-file>', 'Result log file')
     .action(function (args, options, logger) {
         logger.info(`parse ${args.sourceDir}:`);

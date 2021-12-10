@@ -6,11 +6,11 @@ let maxItems = 10;
 
 export default cli.command('collect-enums', 'Collect values').alias('ce')
     .argument('<source-dir>', 'Source directory')
-    .option('--log-file <log-file>', 'Result log file')
-    .option('--state-file <state-file>', 'File with a previous result')
-    .option('--from-file <from-file>', 'From file number')
-    .option('--max-items <max-items>', 'Max values to collect for an each field')
-    .option('--max-files <max-files>', 'Max source files count')
+    .option('-lf, --log-file <log-file>', 'Result log file')
+    .option('-sf, --state-file <state-file>', 'File with a previous result')
+    .option('-ff, --from-file <from-file>', 'From file number')
+    .option('-mi, --max-items <max-items>', 'Max values to collect for an each field')
+    .option('-mf, --max-files <max-files>', 'Max source files count')
     .action(function (args, options, logger) {
         logger.info(`collect ${args.sourceDir}:`);
 
