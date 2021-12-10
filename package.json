@@ -1,5 +1,5 @@
 {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "name": "@musicbird/gpx-parser",
     "author": "Fletcher Lind",
     "email": "musicbird.project@gmail.com",
@@ -12,9 +12,9 @@
     "module": "dist/main.js",
     "typings": "index.d.ts",
     "files": [
-        "./dist/main.js",
-        "./index.d.ts",
-        "./src"
+        "dist/main.js",
+        "src/**/*",
+        "index.d.ts"
     ],
     "scripts": {
         "build": "rollup -c ./rollup.config.js",
