@@ -15,6 +15,11 @@ required:
 - rhythms
 properties:
 
+  gpversion:
+    type: string
+    typecast:
+      type: number
+
   gprevision:
     type: string
     typecast:

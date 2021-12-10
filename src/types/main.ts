@@ -7,6 +7,7 @@ import { Bar } from './bar';
 import { Voice, Beat, Note, Rhythm } from './music-data';
 
 export interface Gpif {
+    gpversion: string;
     gprevision: string;
     score: Score;
     mastertrack: MasterTrack;

@@ -49,9 +49,8 @@ export function gpifReducer(xmlTree): any {
 
 function defaultReducer(res, node: Node): any {
     const path = cursor.push(node.name) && cursor.join('.');
-    const data = mapNode(node, path);
 
-    res[node.name] = data;
+    res[node.name] = mapNode(node, path);
     cursor.pop();
 
     return res;
@@ -77,17 +76,17 @@ function listReducer(res, node: Node, index): Array<any> {
 ///
 
 function mapNode(node: Node, path, isListItem = false): any {
-    const { value, attrs, children } = node;
-    let temp;
+    const {value, attrs, children} = node;
 
+    let temp;
     switch (true) {
-        case listNodes.includes(path):
+        case (listNodes.includes(path)):
             temp = {
                 items: getChildren(node).reduce(listReducer, [])
             };
             break;
 
-        case value !== undefined:
+        case (value !== undefined): {
             let newValue = value === null
                 ? void 0
                 : value;
@@ -99,18 +98,18 @@ function mapNode(node: Node, path, isListItem = false): any {
             temp = isListItem
                 ? { node: node.name, value: newValue }
                 : newValue;
-            break;
 
-        case !!children:
+        } break;
+
+        case Boolean(children):
             temp = children.reduce(defaultReducer, {});
             break;
 
-        default:
+        default: {
             temp = isListItem
                 ? { node: node.name }
-                : node.isSelfClosing
-                    ? true
-                    : '';
+                : node.isSelfClosing ? true : '';
+        }
     }
 
     if (attrs && Object.keys(attrs).length) {
