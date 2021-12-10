@@ -45,17 +45,17 @@ For using cli commands you need to:
 - **bulk-check** Validates a collection of gpx files and collect found errors
 ```
     argument: <source-dir> // Source directory:
-    option: -ff, --from-file <from-file> // Start from file
-    option: -le, --errors-file <errors-file> // Error Details
-    option: -lf, --log-file <log-file> // Result log file
+    option: -ff, --from-file <from-file> // Start from a file
+    option: -le, --errors-file <errors-file> // Errors Details
+    option: -lf, --log-file <log-file> // Results file
 ```
 
 - **collect-enums** Walks through a collection of gpx files and collects possible fields and values
 ```
     argument: <source-dir> // 'Source directory
     option: --log-file <log-file> // Result log file
-    option: --state-file <state-file> // File with a previous result
-    option: --from-file <from-file> // From file number
+    option: --state-file <state-file> // State file (contains current state of a collection progress)
+    option: --from-file <from-file> // Start from an nth file
     option: --max-items <max-items> // Max values to collect for an each field
     option: --max-files <max-files> // Max source files count
 ```
