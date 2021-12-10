@@ -1,7 +1,7 @@
 import { Ottavia, XProperty, List } from './common';
 
 export interface Bar {
-    node: "bar";
+    node: 'bar';
     clef: Clef;
     ottavia: Ottavia;
     similemark: SimileMark;

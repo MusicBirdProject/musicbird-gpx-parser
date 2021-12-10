@@ -2,7 +2,7 @@ import { BooleanString, List, Ottavia, UpDown } from '../common';
 import { BeatProperty, BeatXProperty } from './beat-properties';
 
 export interface Beat {
-    node: "beat";
+    node: 'beat';
     freetext: string;
     dynamic: Dynamic;
     ottavia: Ottavia;

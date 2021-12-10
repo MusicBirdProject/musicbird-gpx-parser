@@ -1,4 +1,4 @@
-import * as process from "process";
+import * as process from 'process';
 import { readBitsReversed, getString } from './helpers';
 
 const jDataView = require('jdataview');
@@ -6,8 +6,8 @@ const jDataView = require('jdataview');
 ///
 
 export enum FileTypes {
-    MiscXml = "misc.xml",
-    ScoreGpif = "score.gpif"
+    MiscXml = 'misc.xml',
+    ScoreGpif = 'score.gpif'
 }
 
 export interface ParsedData {
@@ -54,10 +54,10 @@ function handleBlock(bin): InternalFile[] {
     const header = bin.getString(4);
 
     switch(header) {
-        case "BCFZ":
+        case 'BCFZ':
             return parseBlock(decompressBlock(bin, true));
 
-        case "BCFS":
+        case 'BCFS':
             return parseBlock(bin);
 
         default:

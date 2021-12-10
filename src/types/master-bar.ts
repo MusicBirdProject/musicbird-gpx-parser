@@ -1,7 +1,7 @@
 import { List, BooleanString } from './common';
 
 export interface MasterBar {
-    node: "masterbar";
+    node: 'masterbar';
     key?: Key;
     time?: string; // 4/4
     freetime?: boolean;
@@ -34,28 +34,28 @@ export interface Repeat {
 }
 
 export interface Fermata {
-    node: "fermata";
+    node: 'fermata';
     type: FermataType;
     offset: string;
     length: string; // 0..1
 }
 
 export interface DirectionTargetItem {
-    node: "target";
+    node: 'target';
     value: MusicalDirectionTarget;
 }
 
 export interface DirectionJumpItem {
-    node: "jump";
+    node: 'jump';
     value: MusicalDirectionJump;
 }
 
 ///
 
 export enum FermataType {
-    Short = "short",
-    Medium = "medium",
-    Long = "long"
+    Short = 'short',
+    Medium = 'medium',
+    Long = 'long'
 }
 
 export enum MusicalDirectionTarget {

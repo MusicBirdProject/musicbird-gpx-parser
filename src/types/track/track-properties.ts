@@ -15,27 +15,27 @@ export enum PropertyType {
 
 /* Properties */
 
-export interface TuningProperty extends Property<"Tuning"> {
+export interface TuningProperty extends Property<'Tuning'> {
     pitches: string;
 }
 
-export interface CapoFretProperty extends Property<"CapoFret"> {
+export interface CapoFretProperty extends Property<'CapoFret'> {
     fret: string;
 }
 
-export interface PartialCapoFretProperty extends Property<"PartialCapoFret"> {
+export interface PartialCapoFretProperty extends Property<'PartialCapoFret'> {
     fret: string;
 }
 
-export interface AutoBrushProperty extends Property<"AutoBrush"> {
+export interface AutoBrushProperty extends Property<'AutoBrush'> {
     enable: boolean;
 }
 
-export interface TuningFlatProperty extends Property<"TuningFlat"> {
+export interface TuningFlatProperty extends Property<'TuningFlat'> {
     enable: boolean;
 }
 
-export interface ChordCollectionProperty extends Property<"DiagramCollection"|"DiagramWorkingSet"|"ChordCollection"|"ChordWorkingSet"> {
+export interface ChordCollectionProperty extends Property<'DiagramCollection'|'DiagramWorkingSet'|'ChordCollection'|'ChordWorkingSet'> {
     items: List<ChordCollectionItem>;
 }
 

@@ -1,6 +1,6 @@
 import { List, Automation, AutomationTypes, Effect, Lyrics, BooleanString } from '../common';
 import { Instrument } from './instruments';
-import { TrackProperty } from "./track-properties";
+import { TrackProperty } from './track-properties';
 
 export interface Track {
     node: "track";

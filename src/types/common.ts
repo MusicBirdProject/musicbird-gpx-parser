@@ -3,14 +3,14 @@ export interface List<T> {
 }
 
 export interface Property<T> {
-    node: "property";
+    node: 'property';
     attrs: {
         name: T;
     };
 }
 
 export interface XProperty<T> {
-    node: "xproperty";
+    node: 'xproperty';
     int?: string;
     float?: string;
     double?: string;
@@ -20,7 +20,7 @@ export interface XProperty<T> {
 }
 
 export interface Effect<T> {
-    node: "effect";
+    node: 'effect';
     parameters?: string;
     bypass?: boolean;
     bypassedautomations?: string;
@@ -31,7 +31,7 @@ export interface Effect<T> {
 }
 
 export interface Automation<T> {
-    node: "automation";
+    node: 'automation';
     attrs?: {
         id: string;
     };
@@ -54,7 +54,7 @@ export interface Lyrics extends List<LyricsLine> {
 }
 
 export interface LyricsLine {
-    node: "line";
+    node: 'line';
     offset: string;
     text: string;
 }

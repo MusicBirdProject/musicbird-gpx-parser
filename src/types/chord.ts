@@ -1,5 +1,5 @@
 import { List, Finger } from './common';
-import { BooleanString, Accidental, Interval, Alteration, Step } from "./common";
+import { BooleanString, Accidental, Interval, Alteration, Step } from './common';
 
 ///
 
@@ -23,7 +23,7 @@ export interface Diagram extends List<Fret|FingeringProperty|DiagramProperty> {
 }
 
 export interface Fret {
-    node: "fret";
+    node: 'fret';
     attrs: {
         string: string;
         fret: string;
@@ -31,11 +31,11 @@ export interface Fret {
 }
 
 export interface FingeringProperty extends List<Position> {
-    node: "fingering";
+    node: 'fingering';
 }
 
 export interface Position {
-    node: "position";
+    node: 'position';
     attrs: {
         finger: Finger;
         fret: string;
@@ -44,7 +44,7 @@ export interface Position {
 }
 
 export interface DiagramProperty {
-    node: "property";
+    node: 'property';
     attrs: {
         name: string;
         type: string;
@@ -57,7 +57,7 @@ export interface DiagramProperty {
 export interface Chord extends List<KeyNote|BassNote|Degree> {}
 
 export interface KeyNote {
-    node: "keynote";
+    node: 'keynote';
     attrs: {
         step: Step;
         accidental: Accidental;
@@ -65,7 +65,7 @@ export interface KeyNote {
 }
 
 export interface BassNote {
-    node: "bassnote";
+    node: 'bassnote';
     attrs: {
         step: Step;
         accidental: Accidental;
@@ -73,7 +73,7 @@ export interface BassNote {
 }
 
 export interface Degree {
-    node: "degree";
+    node: 'degree';
     attrs: {
         interval: Interval;
         alteration: Alteration;

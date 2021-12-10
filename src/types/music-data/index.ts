@@ -3,7 +3,7 @@ export * from './beat-properties';
 export * from './note';
 
 export interface Voice {
-    node: "voice";
+    node: 'voice';
     beats: string;
     attrs: {
         id: string;
@@ -11,7 +11,7 @@ export interface Voice {
 }
 
 export interface Rhythm {
-    node: "rhythm";
+    node: 'rhythm';
     notevalue: Duration;
     primarytuplet: PrimaryTuplet;
     augmentationdot: AugmentationDot;
